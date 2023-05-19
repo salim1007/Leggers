@@ -7,6 +7,7 @@ import Logo2 from "../collections/images/browniees-girl.jpg";
 import Logo3 from "../collections/images/girl-blue.jpg";
 import Logo4 from "../collections/images/gray-girl.jpg";
 import MotionText from "./MotionText";
+import ImageSlider from "../../components/ImageSlider/ImageSlider";
 
 const Collections = () => {
   const responsive = {
@@ -49,7 +50,8 @@ const Collections = () => {
         <div className=" -ml-14 -mr-14 bg-indigo-500 h-72 rounded-lg p-4 font-bold ">
           <p>Trending</p>
           <div className="bg-slate-600 h-56">
-            <p className=" ml-2 mr-2">here and there</p>
+            
+            <ImageSlider/>
           </div>
         </div>
         <div className=" mr-4 ml-24 bg-red-600 h-72 rounded-lg p-4 font-bold  ">
