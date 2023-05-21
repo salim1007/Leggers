@@ -5,32 +5,32 @@ import { Link } from "react-router-dom";
 const AdminNavbar = () => {
   return (
     <div className=" flex flex-col gap-3">
-      <div className="flex flex-row gap-2 p-3 bg-yellow-500 hover:bg-gray-500 hover:text-white">
+      <Link to="/admin/dashboard" className="flex flex-row gap-2 p-3 bg-yellow-500 hover:bg-gray-500 hover:text-white">
         <AccountCircle />
-        <Link to="/admin/dashboard">Dashboard</Link>
-      </div>
+        <div>Dashboard</div>
+      </Link>
 
       <div>
         <p className="flex ml-3">Category</p>
-        <div className="flex flex-row bg-yellow-500 p-3 gap-2 mt-2  hover:bg-gray-500 hover:text-white  ">
+        <Link to="/admin/add-category" className="flex flex-row bg-yellow-500 p-3 gap-2 mt-2  hover:bg-gray-500 hover:text-white  ">
           <Queue />
-          <Link to="">Add Category</Link>
-        </div>
-        <div className="flex flex-row bg-yellow-500 p-3 gap-2  hover:bg-gray-500 hover:text-white">
+          <div>Add Category</div>
+        </Link>
+        <Link to="/admin/view-category" className="flex flex-row bg-yellow-500 p-3 gap-2  hover:bg-gray-500 hover:text-white">
           <LibraryBooks />
-          <Link to="">View Category</Link>
-        </div>
+          <div>View Category</div>
+        </Link>
       </div>
       <div>
       <p className="flex ml-3">Product</p>
-        <div className="flex flex-row bg-yellow-500 p-3 gap-2 mt-2  hover:bg-gray-500 hover:text-white ">
+        <Link to="/admin/add-product" className="flex flex-row bg-yellow-500 p-3 gap-2 mt-2  hover:bg-gray-500 hover:text-white ">
           <Queue />
-          <Link to="">Add Product</Link>
-        </div>
-        <div className="flex flex-row bg-yellow-500 p-3 gap-2  hover:bg-gray-500 hover:text-white">
+          <div>Add Product</div>
+        </Link>
+        <Link  to="/admin/view-product" className="flex flex-row bg-yellow-500 p-3 gap-2  hover:bg-gray-500 hover:text-white">
           <LibraryBooks />
-          <Link to="">View Product</Link>
-        </div>
+          <div>View Product</div>
+        </Link>
       </div>
     </div>
   );
