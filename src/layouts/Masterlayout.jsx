@@ -9,14 +9,14 @@ const Masterlayout = () => {
           <Link to="/">Home</Link>
         </div>
         <div className=" font-bold text-amber-200">
-          <Link to="/">Collections</Link>
+          <Link to="/collections">Collections</Link>
         </div>
       </div>
       <div className="flex flex-row h-full w-screen bg-green-400">
         <div className="bg-blue-500 h-auto w-72">
             <AdminNavbar/>
         </div>
-        <div className="bg-gray-600 h-auto w-full">
+        <div className="bg-gray-600 h-full  w-full">
             <main>
                 <Outlet/>
             </main>

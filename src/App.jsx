@@ -6,11 +6,12 @@ import Login from './components/Login'
 import Collections from './pages/collections/Collections'
 import Masterlayout from './layouts/Masterlayout'
 import Dashboard from './components/admin/Dashboard'
-import AddCategory from './components/admin/AddCategory'
-import AddProduct from './components/admin/AddProduct'
+import AddCategory from './components/admin/category/AddCategory'
+import AddProduct from './components/admin/products/AddProduct'
 
 
 import axios from 'axios'
+import EditCategory from './components/admin/category/EditCategory'
 axios.defaults.baseURL = "http://localhost:8000/";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 axios.defaults.headers.post["Accept"] = "application/json";
@@ -37,6 +38,7 @@ const App = () => {
           <Route path='/admin/dashboard' element={<Dashboard/>} />
           <Route path='/admin/add-category' element={<AddCategory/>}/>
           <Route path='/admin/add-product' element={<AddProduct/>} />
+          <Route path='/admin/edit-category/:id' element={<EditCategory/>} />
         </Route>
        
 

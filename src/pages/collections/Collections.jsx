@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -8,8 +8,11 @@ import Logo3 from "../collections/images/girl-blue.jpg";
 import Logo4 from "../collections/images/gray-girl.jpg";
 import MotionText from "./MotionText";
 import ImageSlider from "../../components/ImageSlider/ImageSlider";
+import axios from "axios";
 
 const Collections = () => {
+  const [viewProduct, setViewProduct] = useState([]);
+
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -28,6 +31,14 @@ const Collections = () => {
       items: 1,
     },
   };
+
+  useEffect(() => {
+    axios.get(`/api/view-products`).then((res) => {
+      if (res.data.status === 200) {
+        setViewProduct(res.data.products);
+      }
+    });
+  });
 
   return (
     <div className=" bg-amber-600 h-full w-full ">
@@ -50,8 +61,7 @@ const Collections = () => {
         <div className=" -ml-14 -mr-14 bg-indigo-500 h-72 rounded-lg p-4 font-bold ">
           <p>Trending</p>
           <div className="bg-slate-600 h-56">
-            
-            <ImageSlider/>
+            <ImageSlider />
           </div>
         </div>
         <div className=" mr-4 ml-24 bg-red-600 h-72 rounded-lg p-4 font-bold  ">
@@ -68,24 +78,32 @@ const Collections = () => {
           </p>
           <div className=" bg-green-600 ml-4 mr-4 rounded-md rounded-tl-none h-80 flex flex-col justify-evenly p-4  ">
             <Carousel responsive={responsive}>
-              <div className=" bg-slate-600 h-72 w-40 flex flex-col rounded  ">
-                <img
-                  src={Logo}
-                  alt="Office Shoes"
-                  className="object-scale-down h-fit w-fit rounded-b-none rounded"
-                />
-                <div className=" mt-4  flex flex-col items-center gap-1  ">
-                  <h2 className=" text-xs font-bold">Office shoes</h2>
-                  <p className=" text-xs">$20.87</p>
-                  <p className=" text-xs">Description over here</p>
-                  <p>
-                    <button className="text-xs text-white bg-black p-2 rounded-md">
-                      Add to Cart
-                    </button>
-                  </p>
-                </div>
-              </div>
-              <div className=" bg-blue-400 h-72 w-40 flex flex-col rounded ">
+              {viewProduct.map((item) => {
+                return (
+                  <div
+                    key={item.id}
+                    className=" bg-slate-600 h-72 w-40 flex flex-col rounded  "
+                  >
+                    <img
+                      src={`http://localhost:8000/${item.image}`}
+                      alt={item.name}
+                      className="object-scale-down h-fit w-fit rounded-b-none rounded"
+                    />
+                    <div className=" mt-4  flex flex-col items-center gap-1  ">
+                      <h2 className=" text-xs font-bold">{item.name}</h2>
+                      <p className=" text-xs">{item.sellingPrice}</p>
+                      <p className=" text-xs">{item.description}</p>
+                      <p>
+                        <button className="text-xs text-white bg-black p-2 rounded-md">
+                          Add to Cart
+                        </button>
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+
+              {/* <div className=" bg-blue-400 h-72 w-40 flex flex-col rounded ">
                 <img
                   src={Logo2}
                   alt="Office Shoes"
@@ -186,7 +204,7 @@ const Collections = () => {
                     </button>
                   </p>
                 </div>
-              </div>
+              </div> */}
             </Carousel>
           </div>
         </div>
