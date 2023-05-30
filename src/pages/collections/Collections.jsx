@@ -11,7 +11,12 @@ import ImageSlider from "../../components/ImageSlider/ImageSlider";
 import axios from "axios";
 
 const Collections = () => {
-  const [viewProduct, setViewProduct] = useState([]);
+  const [menOfficial, setMenOfficial] = useState([]);
+  const [womenOfficial, setWomenOfficial] = useState([]);
+  const [boykids, setBoykids] = useState([]);
+  const [girlkids, setGirlkids] = useState([]);
+  const [menCasual, setMenCasual] = useState([]);
+  const [womenCasual, setWomenCasual] = useState([]);
 
   const responsive = {
     superLargeDesktop: {
@@ -33,12 +38,42 @@ const Collections = () => {
   };
 
   useEffect(() => {
-    axios.get(`/api/view-products`).then((res) => {
+    axios.get(`/api/view-product-boykids`).then((res) => {
       if (res.data.status === 200) {
-        setViewProduct(res.data.products);
+        setBoykids(res.data.boykids);
       }
     });
-  });
+
+    axios.get(`/api/view-product-girlkids`).then((res) => {
+      if (res.data.status === 200) {
+        setGirlkids(res.data.girlkids);
+      }
+    });
+
+    axios.get(`/api/view-product-menOfficial`).then((res) => {
+      if (res.data.status === 200) {
+        setMenOfficial(res.data.menOfficial);
+      }
+    });
+
+    axios.get(`/api/view-product-menCasual`).then((res) => {
+      if (res.data.status === 200) {
+        setMenCasual(res.data.menCasual);
+      }
+    });
+
+    axios.get(`/api/view-product-womenOfficial`).then((res) => {
+      if (res.data.status === 200) {
+        setWomenOfficial(res.data.womenOfficial);
+      }
+    });
+
+    axios.get(`/api/view-product-womenCasual`).then((res) => {
+      if (res.data.status === 200) {
+        setWomenCasual(res.data.womenCasual);
+      }
+    });
+  }, []);
 
   return (
     <div className=" bg-amber-600 h-full w-full ">
@@ -64,21 +99,36 @@ const Collections = () => {
             <ImageSlider />
           </div>
         </div>
-        <div className=" mr-4 ml-24 bg-red-600 h-72 rounded-lg p-4 font-bold  ">
+       <div className="flex flex-col gap-8">
+       <div className=" mr-4 ml-24 bg-red-600 h-32 rounded-lg p-4 font-bold  ">
           <p>New Products</p>
-          <div className=" bg-orange-500 h-56">
-            <p className=" ml-2 mr-2">here and there</p>
+          <div className=" bg-orange-500 h-16 ">
+            <p className=" ml-2 mr-2">Date and time</p>
           </div>
         </div>
+        <div className=" mr-4 ml-24 bg-red-600 h-32 rounded-lg p-4 font-bold  ">
+          <p>New Products</p>
+          <div className=" bg-orange-500 h-16">
+            <p className=" ml-2 mr-2">Visit on holidays</p>
+          </div>
+        </div>
+       </div>
       </div>
+
       <div className=" flex flex-col mt-10 gap-6 ">
+        <div className="flex mt-8 bg-slate-600 w-fit p-4 rounded rounded-l-none rounded-r-3xl">
+          <p className=" w-48 flex justify-center items-center font-bold italic">
+            Men
+          </p>
+        </div>
+
         <div>
           <p className="bg-slate-600 w-28 p-2 ml-4 pl-6 rounded rounded-b-none rounded-tr-3xl text-white">
-            Men
+            Casual
           </p>
           <div className=" bg-green-600 ml-4 mr-4 rounded-md rounded-tl-none h-80 flex flex-col justify-evenly p-4  ">
             <Carousel responsive={responsive}>
-              {viewProduct.map((item) => {
+              {menCasual.map((item) => {
                 return (
                   <div
                     key={item.id}
@@ -102,386 +152,205 @@ const Collections = () => {
                   </div>
                 );
               })}
+            </Carousel>
+          </div>
+        </div>
 
-              {/* <div className=" bg-blue-400 h-72 w-40 flex flex-col rounded ">
-                <img
-                  src={Logo2}
-                  alt="Office Shoes"
-                  className="object-scale-down h-fit w-fit rounded-b-none rounded"
-                />
-                <div className=" mt-4  flex flex-col items-center gap-1  ">
-                  <h2 className=" text-xs font-bold">Office shoes</h2>
-                  <p className=" text-xs">$20.87</p>
-                  <p className=" text-xs">Description over here</p>
-                  <p>
-                    <button className="text-xs text-white bg-black p-2 rounded-md">
-                      Add to Cart
-                    </button>
-                  </p>
-                </div>
-              </div>
-              <div className=" bg-zinc-600 h-72 w-40 flex flex-col rounded ">
-                <img
-                  src={Logo3}
-                  alt="Office Shoes"
-                  className="object-scale-down h-fit w-fit rounded-b-none rounded"
-                />
-                <div className=" mt-4  flex flex-col items-center gap-1  ">
-                  <h2 className=" text-xs font-bold">Office shoes</h2>
-                  <p className=" text-xs">$20.87</p>
-                  <p className=" text-xs">Description over here</p>
-                  <p>
-                    <button className="text-xs text-white bg-black p-2 rounded-md">
-                      Add to Cart
-                    </button>
-                  </p>
-                </div>
-              </div>
-              <div className=" bg-blue-400 h-72 w-40 flex flex-col rounded ">
-                <img
-                  src={Logo4}
-                  alt="Office Shoes"
-                  className="object-scale-down h-fit w-fit rounded-b-none rounded"
-                />
-                <div className=" mt-4  flex flex-col items-center gap-1  ">
-                  <h2 className=" text-xs font-bold">Office shoes</h2>
-                  <p className=" text-xs">$20.87</p>
-                  <p className=" text-xs">Description over here</p>
-                  <p>
-                    <button className="text-xs text-white bg-black p-2 rounded-md">
-                      Add to Cart
-                    </button>
-                  </p>
-                </div>
-              </div>
-              <div className=" bg-blue-400 h-72 w-40 flex flex-col rounded ">
-                <img
-                  src={Logo4}
-                  alt="Office Shoes"
-                  className="object-scale-down h-fit w-fit rounded-b-none rounded"
-                />
-                <div className=" mt-4  flex flex-col items-center gap-1  ">
-                  <h2 className=" text-xs font-bold">Office shoes</h2>
-                  <p className=" text-xs">$20.87</p>
-                  <p className=" text-xs">Description over here</p>
-                  <p>
-                    <button className="text-xs text-white bg-black p-2 rounded-md">
-                      Add to Cart
-                    </button>
-                  </p>
-                </div>
-              </div>
-              <div className=" bg-blue-400 h-72 w-40 flex flex-col rounded ">
-                <img
-                  src={Logo4}
-                  alt="Office Shoes"
-                  className="object-scale-down h-fit w-fit rounded-b-none rounded"
-                />
-                <div className=" mt-4  flex flex-col items-center gap-1  ">
-                  <h2 className=" text-xs font-bold">Office shoes</h2>
-                  <p className=" text-xs">$20.87</p>
-                  <p className=" text-xs">Description over here</p>
-                  <p>
-                    <button className="text-xs text-white bg-black p-2 rounded-md">
-                      Add to Cart
-                    </button>
-                  </p>
-                </div>
-              </div>
-              <div className=" bg-blue-400 h-72 w-40 flex flex-col rounded ">
-                <img
-                  src={Logo4}
-                  alt="Office Shoes"
-                  className="object-scale-down h-fit w-fit rounded-b-none rounded"
-                />
-                <div className=" mt-4  flex flex-col items-center gap-1  ">
-                  <h2 className=" text-xs font-bold">Office shoes</h2>
-                  <p className=" text-xs">$20.87</p>
-                  <p className=" text-xs">Description over here</p>
-                  <p>
-                    <button className="text-xs text-white bg-black p-2 rounded-md">
-                      Add to Cart
-                    </button>
-                  </p>
-                </div>
-              </div> */}
+        <div>
+          <p className="bg-slate-600 w-28 p-2 ml-4 pl-6 rounded rounded-b-none rounded-tr-3xl text-white">
+            Official
+          </p>
+          <div className=" bg-green-600 ml-4 mr-4 rounded-md rounded-tl-none h-80 flex flex-col justify-evenly p-4  ">
+            <Carousel responsive={responsive}>
+              {menOfficial.map((item) => {
+                return (
+                  <div
+                    key={item.id}
+                    className=" bg-slate-600 h-72 w-40 flex flex-col rounded  "
+                  >
+                    <img
+                      src={`http://localhost:8000/${item.image}`}
+                      alt={item.name}
+                      className="object-scale-down h-fit w-fit rounded-b-none rounded"
+                    />
+                    <div className=" mt-4  flex flex-col items-center gap-1  ">
+                      <h2 className=" text-xs font-bold">{item.name}</h2>
+                      <p className=" text-xs">{item.sellingPrice}</p>
+                      <p className=" text-xs">{item.description}</p>
+                      <p>
+                        <button className="text-xs text-white bg-black p-2 rounded-md">
+                          Add to Cart
+                        </button>
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </Carousel>
+          </div>
+        </div>
+
+        <div className="flex mt-8 bg-slate-600 w-fit p-4 rounded rounded-l-none rounded-r-3xl">
+          <p className=" w-48 flex justify-center items-center font-bold italic">
+            Women
+          </p>
+        </div>
+        <div>
+          <p className="bg-slate-600 w-28 p-2 pl-6 ml-4 rounded rounded-b-none rounded-tr-3xl text-white  ">
+            Casual
+          </p>
+          <div className=" bg-indigo-900 ml-4 mr-4 rounded-md rounded-tl-none h-80 flex flex-col justify-evenly p-4  ">
+            <Carousel responsive={responsive}>
+              {womenCasual.map((item) => {
+                return (
+                  <div
+                    key={item.id}
+                    className=" bg-slate-600 h-72 w-40 flex flex-col rounded  "
+                  >
+                    <img
+                      src={`http://localhost:8000/${item.image}`}
+                      alt={item.name}
+                      className="object-scale-down h-fit w-fit rounded-b-none rounded"
+                    />
+                    <div className=" mt-4  flex flex-col items-center gap-1  ">
+                      <h2 className=" text-xs font-bold">{item.name}</h2>
+                      <p className=" text-xs">{item.sellingPrice}</p>
+                      <p className=" text-xs">{item.description}</p>
+                      <p>
+                        <button className="text-xs text-white bg-black p-2 rounded-md">
+                          Add to Cart
+                        </button>
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
             </Carousel>
           </div>
         </div>
         <div>
           <p className="bg-slate-600 w-28 p-2 pl-6 ml-4 rounded rounded-b-none rounded-tr-3xl text-white  ">
-            Women
+            Official
           </p>
           <div className=" bg-indigo-900 ml-4 mr-4 rounded-md rounded-tl-none h-80 flex flex-col justify-evenly p-4  ">
             <Carousel responsive={responsive}>
-              <div className=" bg-slate-600 h-72 w-40 flex flex-col rounded  ">
-                <img
-                  src={Logo}
-                  alt="Office Shoes"
-                  className="object-scale-down h-fit w-fit rounded-b-none rounded"
-                />
-                <div className=" mt-4  flex flex-col items-center gap-1  ">
-                  <h2 className=" text-xs font-bold">Office shoes</h2>
-                  <p className=" text-xs">$20.87</p>
-                  <p className=" text-xs">Description over here</p>
-                  <p>
-                    <button className="text-xs text-white bg-black p-2 rounded-md">
-                      Add to Cart
-                    </button>
-                  </p>
-                </div>
-              </div>
-              <div className=" bg-blue-400 h-72 w-40 flex flex-col rounded ">
-                <img
-                  src={Logo2}
-                  alt="Office Shoes"
-                  className="object-scale-down h-fit w-fit rounded-b-none rounded"
-                />
-                <div className=" mt-4  flex flex-col items-center gap-1  ">
-                  <h2 className=" text-xs font-bold">Office shoes</h2>
-                  <p className=" text-xs">$20.87</p>
-                  <p className=" text-xs">Description over here</p>
-                  <p>
-                    <button className="text-xs text-white bg-black p-2 rounded-md">
-                      Add to Cart
-                    </button>
-                  </p>
-                </div>
-              </div>
-              <div className=" bg-zinc-600 h-72 w-40 flex flex-col rounded ">
-                <img
-                  src={Logo3}
-                  alt="Office Shoes"
-                  className="object-scale-down h-fit w-fit rounded-b-none rounded"
-                />
-                <div className=" mt-4  flex flex-col items-center gap-1  ">
-                  <h2 className=" text-xs font-bold">Office shoes</h2>
-                  <p className=" text-xs">$20.87</p>
-                  <p className=" text-xs">Description over here</p>
-                  <p>
-                    <button className="text-xs text-white bg-black p-2 rounded-md">
-                      Add to Cart
-                    </button>
-                  </p>
-                </div>
-              </div>
-              <div className=" bg-blue-400 h-72 w-40 flex flex-col rounded ">
-                <img
-                  src={Logo4}
-                  alt="Office Shoes"
-                  className="object-scale-down h-fit w-fit rounded-b-none rounded"
-                />
-                <div className=" mt-4  flex flex-col items-center gap-1  ">
-                  <h2 className=" text-xs font-bold">Office shoes</h2>
-                  <p className=" text-xs">$20.87</p>
-                  <p className=" text-xs">Description over here</p>
-                  <p>
-                    <button className="text-xs text-white bg-black p-2 rounded-md">
-                      Add to Cart
-                    </button>
-                  </p>
-                </div>
-              </div>
-              <div className=" bg-blue-400 h-72 w-40 flex flex-col rounded ">
-                <img
-                  src={Logo4}
-                  alt="Office Shoes"
-                  className="object-scale-down h-fit w-fit rounded-b-none rounded"
-                />
-                <div className=" mt-4  flex flex-col items-center gap-1  ">
-                  <h2 className=" text-xs font-bold">Office shoes</h2>
-                  <p className=" text-xs">$20.87</p>
-                  <p className=" text-xs">Description over here</p>
-                  <p>
-                    <button className="text-xs text-white bg-black p-2 rounded-md">
-                      Add to Cart
-                    </button>
-                  </p>
-                </div>
-              </div>
-              <div className=" bg-blue-400 h-72 w-40 flex flex-col rounded ">
-                <img
-                  src={Logo4}
-                  alt="Office Shoes"
-                  className="object-scale-down h-fit w-fit rounded-b-none rounded"
-                />
-                <div className=" mt-4  flex flex-col items-center gap-1  ">
-                  <h2 className=" text-xs font-bold">Office shoes</h2>
-                  <p className=" text-xs">$20.87</p>
-                  <p className=" text-xs">Description over here</p>
-                  <p>
-                    <button className="text-xs text-white bg-black p-2 rounded-md">
-                      Add to Cart
-                    </button>
-                  </p>
-                </div>
-              </div>
-              <div className=" bg-blue-400 h-72 w-40 flex flex-col rounded ">
-                <img
-                  src={Logo4}
-                  alt="Office Shoes"
-                  className="object-scale-down h-fit w-fit rounded-b-none rounded"
-                />
-                <div className=" mt-4  flex flex-col items-center gap-1  ">
-                  <h2 className=" text-xs font-bold">Office shoes</h2>
-                  <p className=" text-xs">$20.87</p>
-                  <p className=" text-xs">Description over here</p>
-                  <p>
-                    <button className="text-xs text-white bg-black p-2 rounded-md">
-                      Add to Cart
-                    </button>
-                  </p>
-                </div>
-              </div>
+              {womenOfficial.map((item) => {
+                return (
+                  <div
+                    key={item.id}
+                    className=" bg-slate-600 h-72 w-40 flex flex-col rounded  "
+                  >
+                    <img
+                      src={`http://localhost:8000/${item.image}`}
+                      alt={item.name}
+                      className="object-scale-down h-fit w-fit rounded-b-none rounded"
+                    />
+                    <div className=" mt-4  flex flex-col items-center gap-1  ">
+                      <h2 className=" text-xs font-bold">{item.name}</h2>
+                      <p className=" text-xs">{item.sellingPrice}</p>
+                      <p className=" text-xs">{item.description}</p>
+                      <p>
+                        <button className="text-xs text-white bg-black p-2 rounded-md">
+                          Add to Cart
+                        </button>
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
             </Carousel>
           </div>
+        </div>
+
+        <div className="flex mt-8 bg-slate-600 w-fit p-4 rounded rounded-l-none rounded-r-3xl">
+          <p className=" w-48 flex justify-center items-center font-bold italic">
+            Kids
+          </p>
         </div>
 
         <div className="#">
           <p className="bg-slate-600 w-28 p-2 pl-6 ml-4 rounded rounded-b-none rounded-tr-3xl text-white  ">
-            Kids
+            Boys
           </p>
           <div className=" bg-amber-400 ml-4 mr-4 rounded-md rounded-tl-none h-80 flex flex-col justify-evenly p-4  ">
             <Carousel responsive={responsive}>
-              <div className=" bg-slate-600 h-72 w-40 flex flex-col rounded  ">
-                <img
-                  src={Logo}
-                  alt="Office Shoes"
-                  className="object-scale-down h-fit w-fit rounded-b-none rounded"
-                />
-                <div className=" mt-4  flex flex-col items-center gap-1  ">
-                  <h2 className=" text-xs font-bold">Office shoes</h2>
-                  <p className=" text-xs">$20.87</p>
-                  <p className=" text-xs">Description over here</p>
-                  <p>
-                    <button className="text-xs text-white bg-black p-2 rounded-md">
-                      Add to Cart
-                    </button>
-                  </p>
-                </div>
-              </div>
-              <div className=" bg-blue-400 h-72 w-40 flex flex-col rounded ">
-                <img
-                  src={Logo2}
-                  alt="Office Shoes"
-                  className="object-scale-down h-fit w-fit rounded-b-none rounded"
-                />
-                <div className=" mt-4  flex flex-col items-center gap-1  ">
-                  <h2 className=" text-xs font-bold">Office shoes</h2>
-                  <p className=" text-xs">$20.87</p>
-                  <p className=" text-xs">Description over here</p>
-                  <p>
-                    <button className="text-xs text-white bg-black p-2 rounded-md">
-                      Add to Cart
-                    </button>
-                  </p>
-                </div>
-              </div>
-              <div className=" bg-zinc-600 h-72 w-40 flex flex-col rounded ">
-                <img
-                  src={Logo3}
-                  alt="Office Shoes"
-                  className="object-scale-down h-fit w-fit rounded-b-none rounded"
-                />
-                <div className=" mt-4  flex flex-col items-center gap-1  ">
-                  <h2 className=" text-xs font-bold">Office shoes</h2>
-                  <p className=" text-xs">$20.87</p>
-                  <p className=" text-xs">Description over here</p>
-                  <p>
-                    <button className="text-xs text-white bg-black p-2 rounded-md">
-                      Add to Cart
-                    </button>
-                  </p>
-                </div>
-              </div>
-              <div className=" bg-blue-400 h-72 w-40 flex flex-col rounded ">
-                <img
-                  src={Logo4}
-                  alt="Office Shoes"
-                  className="object-scale-down h-fit w-fit rounded-b-none rounded"
-                />
-                <div className=" mt-4  flex flex-col items-center gap-1  ">
-                  <h2 className=" text-xs font-bold">Office shoes</h2>
-                  <p className=" text-xs">$20.87</p>
-                  <p className=" text-xs">Description over here</p>
-                  <p>
-                    <button className="text-xs text-white bg-black p-2 rounded-md">
-                      Add to Cart
-                    </button>
-                  </p>
-                </div>
-              </div>
-              <div className=" bg-blue-400 h-72 w-40 flex flex-col rounded ">
-                <img
-                  src={Logo4}
-                  alt="Office Shoes"
-                  className="object-scale-down h-fit w-fit rounded-b-none rounded"
-                />
-                <div className=" mt-4  flex flex-col items-center gap-1  ">
-                  <h2 className=" text-xs font-bold">Office shoes</h2>
-                  <p className=" text-xs">$20.87</p>
-                  <p className=" text-xs">Description over here</p>
-                  <p>
-                    <button className="text-xs text-white bg-black p-2 rounded-md">
-                      Add to Cart
-                    </button>
-                  </p>
-                </div>
-              </div>
-              <div className=" bg-blue-400 h-72 w-40 flex flex-col rounded ">
-                <img
-                  src={Logo4}
-                  alt="Office Shoes"
-                  className="object-scale-down h-fit w-fit rounded-b-none rounded"
-                />
-                <div className=" mt-4  flex flex-col items-center gap-1  ">
-                  <h2 className=" text-xs font-bold">Office shoes</h2>
-                  <p className=" text-xs">$20.87</p>
-                  <p className=" text-xs">Description over here</p>
-                  <p>
-                    <button className="text-xs text-white bg-black p-2 rounded-md">
-                      Add to Cart
-                    </button>
-                  </p>
-                </div>
-              </div>
-              <div className=" bg-blue-400 h-72 w-40 flex flex-col rounded ">
-                <img
-                  src={Logo4}
-                  alt="Office Shoes"
-                  className="object-scale-down h-fit w-fit rounded-b-none rounded"
-                />
-                <div className=" mt-4  flex flex-col items-center gap-1  ">
-                  <h2 className=" text-xs font-bold">Office shoes</h2>
-                  <p className=" text-xs">$20.87</p>
-                  <p className=" text-xs">Description over here</p>
-                  <p>
-                    <button className="text-xs text-white bg-black p-2 rounded-md">
-                      Add to Cart
-                    </button>
-                  </p>
-                </div>
-              </div>
+              {boykids.map((item) => {
+                return (
+                  <div
+                    key={item.id}
+                    className=" bg-slate-600 h-72 w-40 flex flex-col rounded  "
+                  >
+                    <img
+                      src={`http://localhost:8000/${item.image}`}
+                      alt={item.name}
+                      className="object-scale-down h-fit w-fit rounded-b-none rounded"
+                    />
+                    <div className=" mt-4  flex flex-col items-center gap-1  ">
+                      <h2 className=" text-xs font-bold">{item.name}</h2>
+                      <p className=" text-xs">{item.sellingPrice}</p>
+                      <p className=" text-xs">{item.description}</p>
+                      <p>
+                        <button className="text-xs text-white bg-black p-2 rounded-md">
+                          Add to Cart
+                        </button>
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </Carousel>
+          </div>
+        </div>
+        <div className="#">
+          <p className="bg-slate-600 w-28 p-2 pl-6 ml-4 rounded rounded-b-none rounded-tr-3xl text-white  ">
+            Girls
+          </p>
+          <div className=" bg-amber-400 ml-4 mr-4 rounded-md rounded-tl-none h-80 flex flex-col justify-evenly p-4  ">
+            <Carousel responsive={responsive}>
+              {girlkids.map((item) => {
+                return (
+                  <div
+                    key={item.id}
+                    className=" bg-slate-600 h-72 w-40 flex flex-col rounded"
+                  >
+                    <img
+                      src={`http://localhost:8000/${item.image}`}
+                      alt={item.name}
+                      className="object-scale-down h-fit w-fit rounded-b-none rounded"
+                    />
+                    <div className=" mt-4  flex flex-col items-center gap-1  ">
+                      <h2 className=" text-xs font-bold">{item.name}</h2>
+                      <p className=" text-xs">{item.sellingPrice}</p>
+                      <p className=" text-xs">{item.description}</p>
+                      <p>
+                        <button className="text-xs text-white bg-black p-2 rounded-md">
+                          Add to Cart
+                        </button>
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
             </Carousel>
           </div>
         </div>
       </div>
-      <div className=" bg-zinc-700 mt-24 flex flex-row justify-between p-6">
-        <div>
-          <p>Contact Us:</p>
+      <div className=" bg-zinc-700 mt-24 flex flex-row justify-evenly gap-32 p-6">
+        <div className="w-20">
+          <p className="font-bold">Contact Us:</p>
           <div>sklalkf adlfkmakdmf falflafmadf adfmladfma</div>
         </div>
-        <div>
-          <p>Neighbouring Market:</p>
+        <div className="w-20">
+          <p className="font-bold">Neighbouring Market:</p>
           <div>sklalkf adlfkmakdmf falflafmadf adfmladfma</div>
         </div>
-        <div>
-          <p>Security:</p>
+        <div className="w-20">
+          <p className="font-bold">Security:</p>
           <div>sklalkf adlfkmakdmf falflafmadf adfmladfma</div>
         </div>
-        <div>
-          <p>About:</p>
-          <div>sklalkf adlfkmakdmf falflafmadf adfmladfma</div>
+        <div className="w-20">
+          <p className="font-bold">About:</p>
+          <div>sklalkf adlfkmakdmf falflafmadf adfmladfma hskskdksdsdh skdkhdshds dskhdshk </div>
         </div>
       </div>
     </div>
