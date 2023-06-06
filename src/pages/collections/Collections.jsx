@@ -9,6 +9,7 @@ import Logo4 from "../collections/images/gray-girl.jpg";
 import MotionText from "./MotionText";
 import ImageSlider from "../../components/ImageSlider/ImageSlider";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Collections = () => {
   const [menOfficial, setMenOfficial] = useState([]);
@@ -144,9 +145,9 @@ const Collections = () => {
                       <p className=" text-xs">{item.sellingPrice}</p>
                       <p className=" text-xs">{item.description}</p>
                       <p>
-                        <button className="text-xs text-white bg-black p-2 rounded-md">
+                        <Link to={`/collections/${item.category_id}/${item.prSection}/${item.name}`} className="text-xs text-white bg-black p-2 rounded-md">
                           Add to Cart
-                        </button>
+                        </Link>
                       </p>
                     </div>
                   </div>
@@ -178,9 +179,9 @@ const Collections = () => {
                       <p className=" text-xs">{item.sellingPrice}</p>
                       <p className=" text-xs">{item.description}</p>
                       <p>
-                        <button className="text-xs text-white bg-black p-2 rounded-md">
+                      <Link to={`/collections/${item.category_id}/${item.prSection}/${item.name}`} className="text-xs text-white bg-black p-2 rounded-md">
                           Add to Cart
-                        </button>
+                        </Link>
                       </p>
                     </div>
                   </div>
@@ -217,9 +218,9 @@ const Collections = () => {
                       <p className=" text-xs">{item.sellingPrice}</p>
                       <p className=" text-xs">{item.description}</p>
                       <p>
-                        <button className="text-xs text-white bg-black p-2 rounded-md">
+                      <Link to={`/collections/${item.category_id}/${item.prSection}/${item.name}`} className="text-xs text-white bg-black p-2 rounded-md">
                           Add to Cart
-                        </button>
+                        </Link>
                       </p>
                     </div>
                   </div>
@@ -250,9 +251,9 @@ const Collections = () => {
                       <p className=" text-xs">{item.sellingPrice}</p>
                       <p className=" text-xs">{item.description}</p>
                       <p>
-                        <button className="text-xs text-white bg-black p-2 rounded-md">
+                      <Link to={`/collections/${item.category_id}/${item.prSection}/${item.name}`} className="text-xs text-white bg-black p-2 rounded-md">
                           Add to Cart
-                        </button>
+                        </Link>
                       </p>
                     </div>
                   </div>
@@ -290,9 +291,9 @@ const Collections = () => {
                       <p className=" text-xs">{item.sellingPrice}</p>
                       <p className=" text-xs">{item.description}</p>
                       <p>
-                        <button className="text-xs text-white bg-black p-2 rounded-md">
+                      <Link to={`/collections/${item.category_id}/${item.prSection}/${item.name}`} className="text-xs text-white bg-black p-2 rounded-md">
                           Add to Cart
-                        </button>
+                        </Link>
                       </p>
                     </div>
                   </div>
@@ -323,9 +324,9 @@ const Collections = () => {
                       <p className=" text-xs">{item.sellingPrice}</p>
                       <p className=" text-xs">{item.description}</p>
                       <p>
-                        <button className="text-xs text-white bg-black p-2 rounded-md">
+                      <Link to={`/collections/${item.category_id}/${item.prSection}/${item.name}`} className="text-xs text-white bg-black p-2 rounded-md">
                           Add to Cart
-                        </button>
+                        </Link>
                       </p>
                     </div>
                   </div>

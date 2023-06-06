@@ -1,34 +1,37 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import swal from "sweetalert";
 
-const AddProduct = () => {
+const EditProduct = () => {
   const [categoryFetch, setCateFetch] = useState([]);
   const [brandFetch, setBrandFetch] = useState([]);
   const [sectionFetch, setSectionFetch] = useState([]);
+  const [productInputs, setProductInputs] = useState({
+    category_id: "",
+    brand_id: "",
+    originalPrice: "",
+    name: "",
+    colour: "",
+    sellingPrice: "",
+    qty: "",
+    size: "",
+    prSection: "",
+    image: "",
+    description: "",
+    popular: false,
+    featured: false,
+    status: false,
+  });
 
-  const [allcheckbox, setCheckboxes] = useState([]);
+  let { id } = useParams();
 
-  const [picture, setImage] = useState("");
-
-  const [category_id, setCategoryId] = useState("");
-  const [brand_id, setBrandId] = useState("");
-  const [originalPrice, setOriginalPrice] = useState("");
-  const [name, setName] = useState("");
-  const [colour, setColour] = useState("");
-  const [sellingPrice, setSellingPrice] = useState("");
-  const [qty, setQty] = useState("");
-  const [size, setSize] = useState("");
-  const [prSection, setSection] = useState("");
-  const [description, setDescription] = useState("");
-
-  const handleImage = (e) => {
-    setImage({ image: e.target.files[0] });
-  };
-
-  const handleCheckbox = (e) => {
-    e.persist();
-    setCheckboxes({ ...allcheckbox, [e.target.name]: e.target.checked });
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setProductInputs((prevState) => ({
+      ...prevState,
+      [name]: type === "checkbox" ? checked : value,
+    }));
   };
 
   useEffect(() => {
@@ -39,29 +42,17 @@ const AddProduct = () => {
         setSectionFetch(res.data.category);
       }
     });
+
+    axios.get(`/api/edit-product/` + id).then((res) => {
+      if (res.data.status === 200) {
+        setProductInputs(res.data.product);
+      }
+    });
   }, []);
 
-  const productSubmit = (e) => {
+  const editProductSubmit = (e) => {
     e.preventDefault();
-
-    const formData = new FormData();
-    formData.append("image", picture.image);
-
-    formData.append("category_id", category_id);
-    formData.append("brand_id", brand_id);
-    formData.append("originalPrice", originalPrice);
-    formData.append("name", name);
-    formData.append("colour", colour);
-    formData.append("sellingPrice", sellingPrice);
-    formData.append("qty", qty);
-    formData.append("size", size);
-    formData.append("prSection", prSection);
-    formData.append("description", description);
-    formData.append("featured", allcheckbox.featured ? "1" : "0");
-    formData.append("popular", allcheckbox.popular ? "1" : "0");
-    formData.append("status", allcheckbox.status ? "1" : "0");
-
-    axios.post(`/api/add-product`, formData).then((res) => {
+    axios.put(`/api/update-product/` + id, productInputs).then((res) => {
       if (res.data.status === 200) {
         swal("Success", res.data.message, "success");
       } else if (res.data.status === 400) {
@@ -71,15 +62,19 @@ const AddProduct = () => {
   };
 
   return (
-    <form onSubmit={productSubmit} className="flex flex-col p-4 ml-28 gap-4">
-      <p className="font-bold">ADD PRODUCT</p>
+    <form
+      onSubmit={editProductSubmit}
+      className="flex flex-col p-4 ml-28 gap-4"
+      encType="multipart/form-data"
+    >
+      <p className="font-bold">EDIT PRODUCT</p>
       <div className="flex flex-row gap-12 ">
         <div className="flex flex-col w-1/4 gap-2">
           <label htmlFor="category_id">Category: </label>
           <select
             type="text"
-            onChange={(e) => setCategoryId(e.target.value)}
-            value={category_id}
+            onChange={handleChange}
+            value={productInputs.category_id || ""}
             className=" bg-gray-500 rounded p-2"
             name="category_id"
           >
@@ -97,8 +92,8 @@ const AddProduct = () => {
           <label htmlFor="brand">Brand: </label>
           <select
             type="text"
-            onChange={(e) => setBrandId(e.target.value)}
-            value={brand_id}
+            onChange={handleChange}
+            value={productInputs.brand_id || ""}
             className=" bg-gray-500 rounded p-2"
             name="brand_id"
           >
@@ -116,8 +111,8 @@ const AddProduct = () => {
           <label htmlFor="originalPrice">Original Price: </label>
           <input
             type="text"
-            onChange={(e) => setOriginalPrice(e.target.value)}
-            value={originalPrice}
+            onChange={handleChange}
+            value={productInputs.originalPrice || ""}
             className=" bg-gray-500 rounded p-2"
             name="originalPrice"
           />
@@ -128,8 +123,8 @@ const AddProduct = () => {
           <label htmlFor="name">Name: </label>
           <input
             type="text"
-            onChange={(e) => setName(e.target.value)}
-            value={name}
+            onChange={handleChange}
+            value={productInputs.name || ""}
             className=" bg-gray-500 rounded p-2"
             name="name"
           />
@@ -138,8 +133,8 @@ const AddProduct = () => {
           <label htmlFor="colour">Colour: </label>
           <input
             type="text"
-            onChange={(e) => setColour(e.target.value)}
-            value={colour}
+            onChange={handleChange}
+            value={productInputs.colour || ""}
             className=" bg-gray-500 rounded p-2"
             name="colour"
           />
@@ -148,8 +143,8 @@ const AddProduct = () => {
           <label htmlFor="sellingPrice">Selling Price: </label>
           <input
             type="text"
-            onChange={(e) => setSellingPrice(e.target.value)}
-            value={sellingPrice}
+            onChange={handleChange}
+            value={productInputs.sellingPrice || ""}
             className=" bg-gray-500 rounded p-2"
             name="sellingPrice"
           />
@@ -160,8 +155,8 @@ const AddProduct = () => {
           <label htmlFor="qty">Quantity: </label>
           <input
             type="text"
-            onChange={(e) => setQty(e.target.value)}
-            value={qty}
+            onChange={handleChange}
+            value={productInputs.qty || ""}
             className=" bg-gray-500 rounded p-2"
             name="qty"
           />
@@ -170,8 +165,8 @@ const AddProduct = () => {
           <label htmlFor="size">Size: </label>
           <input
             type="text"
-            onChange={(e) => setSize(e.target.value)}
-            value={size}
+            onChange={handleChange}
+            value={productInputs.size || ""}
             className=" bg-gray-500 rounded p-2"
             name="size"
           />
@@ -180,40 +175,38 @@ const AddProduct = () => {
           <label htmlFor="prSection">Product Section: </label>
           <select
             type="text"
-            onChange={(e) => setSection(e.target.value)}
-            value={prSection}
+            onChange={handleChange}
+            value={productInputs.prSection || ""}
             className=" bg-gray-500 rounded p-2"
             name="prSection"
           >
-            <option>Select Section:</option> 
-            {sectionFetch.map((item)=>{
+            <option>Select Section:</option>
+            {sectionFetch.map((item) => {
               return (
-                <option value={item.section} key={item.id}>{item.section}</option>
-              )
+                <option value={item.section} key={item.id}>
+                  {item.section}
+                </option>
+              );
             })}
-          
           </select>
         </div>
       </div>
       <div className="flex flex-row gap-12 ">
-        <div className="flex flex-col w-2/5 gap-2">
-          <label htmlFor="image">Image: </label>
-          <input
-            type="file"
-            onChange={handleImage}
-            className=" bg-gray-500 rounded p-2"
-            name="image"
-          />
-        </div>
-        <div className="flex flex-col w-2/5 gap-2">
+        
+        <div className="flex flex-col w-3/5 gap-2">
           <label htmlFor="description">Description: </label>
           <input
             type="text"
-            onChange={(e) => setDescription(e.target.value)}
-            value={description}
+            onChange={handleChange}
+            value={productInputs.description || ""}
             className=" bg-gray-500 rounded p-3"
             name="description"
           />
+        </div>
+        <div className="flex flex-col w-2/5 gap-2">
+          <label htmlFor="image">Image: </label>
+         
+          <img src={`http://localhost:8000/${productInputs.image}`} className="rounded-md w-12" />
         </div>
       </div>
       <div className="flex flex-row gap-2 mt-4 justify-start">
@@ -224,8 +217,8 @@ const AddProduct = () => {
           <input
             className="flex "
             type="checkbox"
-            onChange={handleCheckbox}
-            defaultChecked={allcheckbox.popular === 1 ? true : false}
+            onChange={handleChange}
+            checked={productInputs.popular}
             name="popular"
           />
         </div>
@@ -236,8 +229,8 @@ const AddProduct = () => {
           <input
             className="flex "
             type="checkbox"
-            onChange={handleCheckbox}
-            defaultChecked={allcheckbox.featured === 1 ? true : false}
+            onChange={handleChange}
+            checked={productInputs.featured }
             name="featured"
           />
         </div>
@@ -248,19 +241,19 @@ const AddProduct = () => {
           <input
             className="flex "
             type="checkbox"
-            onChange={handleCheckbox}
-            defaultChecked={allcheckbox.status === 1 ? true : false}
+            onChange={handleChange}
+            checked={productInputs.status}
             name="status"
           />
         </div>
       </div>
       <div className="flex justify-center ">
         <button className=" bg-gray-800 text-gray-400 p-2 pr-6 pl-6 mr-32 rounded-md hover:bg-black hover:text-white ">
-          Add
+          Update
         </button>
       </div>
     </form>
   );
 };
 
-export default AddProduct;
+export default EditProduct;

@@ -13,7 +13,7 @@ const Masterlayout = () => {
         </div>
       </div>
       <div className="flex flex-row h-full w-screen bg-green-400">
-        <div className="bg-blue-500 h-auto w-72">
+        <div className="bg-blue-500 h-auto w-72 ">
             <AdminNavbar/>
         </div>
         <div className="bg-gray-600 h-full  w-full">
