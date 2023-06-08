@@ -7,27 +7,76 @@ import { useParams } from "react-router-dom";
 const ViewToCart = () => {
   const [fetchAll, setFetchAll] = useState([]);
 
-  const [getproduct, setFetchProduct] = useState([]);
+  const [product, setFetchProduct] = useState([]);
 
 
   let { categoryid, section, namee } = useParams();
 
+ 
+  useEffect(() => {
+
+    let IsMounted = true;
+
+     axios
+      .get(
+        `/api/viewproductdetails/` + categoryid + `/` + section + `/` + namee
+      )
+      .then((res) => {
+        if (IsMounted) {
+        if (res.data.status === 200) {
+          setFetchProduct(res.data.product);
+          
+        }
+      } else if (res.data.status === 404) {
+        navigate("/collections");
+        swal("Warning ", res.data.message, "error");
+      }
+      });
+
+    axios.get(`/api/fetch-products`).then((res) => {
+      if (res.data.status === 200) {
+        setFetchAll(res.data.products);
+      }
+    });
+
+   
+
+      return () => {
+        IsMounted = false;
+      };
+  }, [categoryid, section, namee]);
+
   const submitAddToCart = (e)=>{
     e.preventDefault();
 
-    const data = {
-      product_id:getproduct.id,
-      product_name:getproduct.name,
-      product_image:getproduct.image,
-      product_sellPrice:getproduct.sellingPrice,
-      product_colour:getproduct.colour,
-      product_size:getproduct.size,
-      product_brand:getproduct.brand_id,
-     
+    if (product.length === 0) {
+      alert("Empty!!");
+      return;
     }
 
+  const selectedProduct = product[0]; // Access the first item in the product array(important..)
+  const {
+    id: product_id,
+    name: product_name,
+    image: product_image,
+    sellingPrice: product_sellPrice,
+    colour: product_colour,
+    size: product_size,
+    brand_id: product_brand,
+  } = selectedProduct;
+
+  const data = {
+    product_id,
+    product_name,
+    product_image,
+    product_sellPrice,
+    product_colour,
+    product_size,
+    product_brand,
+  };
     axios.post(`/api/add-to-cart`, data).then(res => {
       if(res.data.status === 201){
+        
         swal("Success", res.data.message,"success");
       
       }
@@ -39,29 +88,12 @@ const ViewToCart = () => {
         swal("Error", res.data.message,"error");
       }
       else if(res.data.status === 404){
+        console.log(data);
         swal("Error", res.data.message,"error");
       }
     });
   }
 
-  useEffect(() => {
-    axios.get(`/api/fetch-products`).then((res) => {
-      if (res.data.status === 200) {
-        setFetchAll(res.data.products);
-      }
-    });
-
-    axios
-      .get(
-        `/api/viewproductdetails/` + categoryid + `/` + section + `/` + namee
-      )
-      .then((res) => {
-        if (res.data.status === 200) {
-          setFetchProduct(res.data.product);
-          
-        }
-      });
-  }, []);
 
   const responsive = {
     superLargeDesktop: {
@@ -90,7 +122,7 @@ const ViewToCart = () => {
 
       <div className="bg-blue-300 flex flex-row justify-between gap-10 w-full ">
         <div className=" bg-green-400 flex flex-row w-full justify-between h-72">
-          {getproduct.map((item) => {
+          {product.map((item) => {
             return (
               <div key={item.id} className=" flex flex-col">
                 <div className=" bg-amber-600 p-4 h-8 italic items-center flex flex-row justify-start drop-shadow-lg w-full ">
