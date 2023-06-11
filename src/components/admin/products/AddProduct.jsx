@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import swal from "sweetalert";
+import Swal from "sweetalert2";
+
 
 const AddProduct = () => {
   const [categoryFetch, setCateFetch] = useState([]);
   const [brandFetch, setBrandFetch] = useState([]);
-  const [sectionFetch, setSectionFetch] = useState([]);
+ 
 
   const [allcheckbox, setCheckboxes] = useState([]);
 
@@ -36,9 +37,9 @@ const AddProduct = () => {
       if (res.data.status === 200) {
         setCateFetch(res.data.category);
         setBrandFetch(res.data.category);
-        setSectionFetch(res.data.category);
+       
       }
-    });
+    }); 
   }, []);
 
   const productSubmit = (e) => {
@@ -63,9 +64,19 @@ const AddProduct = () => {
 
     axios.post(`/api/add-product`, formData).then((res) => {
       if (res.data.status === 200) {
-        swal("Success", res.data.message, "success");
+        Swal.fire({
+          icon: 'success',
+          title: res.data.message,
+          text: 'Success!',
+         
+        })
       } else if (res.data.status === 400) {
-        swal("Error", res.data.message, "error");
+        Swal.fire({
+          icon: 'error',
+          title: res.data.message,
+          text: 'Error!',
+          
+        })
       }
     });
   };
@@ -185,13 +196,12 @@ const AddProduct = () => {
             className=" bg-gray-500 rounded p-2"
             name="prSection"
           >
-            <option>Select Section:</option> 
-            {sectionFetch.map((item)=>{
-              return (
-                <option value={item.section} key={item.id}>{item.section}</option>
-              )
-            })}
-          
+            <option>Official (M)</option>
+            <option>Casual (M)</option>
+            <option>Official (W)</option>
+            <option>Casual (W)</option>
+            <option>Boys</option>
+            <option>Girls</option>
           </select>
         </div>
       </div>

@@ -1,25 +1,19 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import swal from "sweetalert";
+import Swal from "sweetalert2";
 
 const AddCategory = () => {
-  const [categoryFetch, setCateFetch] = useState([]);
+  
 
   const [status, setStatus] = useState([]);
 
   const [category, setCategory] = useState("");
   const [origin, setOrigin] = useState("");
   const [brandName, setBrandName] = useState("");
-  const [section, setSection] = useState("");
+  const [freshness, setFreshness] = useState("");
   const [description, setDescription] = useState("");
 
-  useEffect(() => {
-    axios.get(`/api/get-category`).then((res) => {
-      if (res.data.status === 200) {
-        setCateFetch(res.data.category);
-      }
-    });
-  }, []);
+
 
   const categorySubmit = (e) => {
     e.preventDefault();
@@ -28,15 +22,25 @@ const AddCategory = () => {
         category,
         origin,
         brandName,
-        section,
+        freshness,
         description,
         status: status ? 1 : 0,
       })
       .then((res) => {
         if (res.data.status === 200) {
-          swal("Success", res.data.message, "success");
+          Swal.fire({
+            icon: 'success',
+            title: res.data.message,
+            text: 'Success!',
+         
+          })
         } else if (res.data.status === 400) {
-          swal("Error", res.data.message, "error");
+          Swal.fire({
+            icon: 'error',
+            title: res.data.message,
+            text: 'Error!',
+         
+          })
         }
       });
   };
@@ -57,14 +61,13 @@ const AddCategory = () => {
             className="rounded bg-gray-500 p-2"
             name="category"
           >
-            <option>Select category</option>
-            {categoryFetch.map((item) => {
-              return (
-                <option value={item.category} key={item.id}>
-                  {item.category}
-                </option>
-              );
-            })}
+            <option>Men (Official)</option>
+            <option>Men (Casual)</option>
+            <option>Women (Official)</option>
+            <option>Women (Casual)</option>
+            <option>Kids (Boys)</option>
+            <option>Kids (Girls)</option>
+           
           </select>
         </div>
         <div className="flex flex-col w-1/2 gap-2">
@@ -90,13 +93,13 @@ const AddCategory = () => {
           />
         </div>
         <div className="flex flex-col w-1/2 gap-2">
-          <label htmlFor="section">Section: </label>
+          <label htmlFor="freshness">Freshness: </label>
           <input
             type="text"
-            onChange={(e) => setSection(e.target.value)}
-            value={section}
+            onChange={(e) => setFreshness(e.target.value)}
+            value={freshness}
             className="rounded bg-gray-500 p-2"
-            name="section"
+            name="freshness"
           />
         </div>
       </div>

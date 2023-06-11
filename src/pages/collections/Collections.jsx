@@ -2,14 +2,11 @@ import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import Logo from "../collections/images/brownn-office.jpg";
-import Logo2 from "../collections/images/browniees-girl.jpg";
-import Logo3 from "../collections/images/girl-blue.jpg";
-import Logo4 from "../collections/images/gray-girl.jpg";
 import MotionText from "./MotionText";
 import ImageSlider from "../../components/ImageSlider/ImageSlider";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import DateTimeDisplay from "./DateTimeDisplay";
 
 const Collections = () => {
   const [menOfficial, setMenOfficial] = useState([]);
@@ -103,8 +100,8 @@ const Collections = () => {
        <div className="flex flex-col gap-8">
        <div className=" mr-4 ml-24 bg-red-600 h-32 rounded-lg p-4 font-bold  ">
           <p>New Products</p>
-          <div className=" bg-orange-500 h-16 ">
-            <p className=" ml-2 mr-2">Date and time</p>
+          <div>
+            <DateTimeDisplay/>
           </div>
         </div>
         <div className=" mr-4 ml-24 bg-red-600 h-32 rounded-lg p-4 font-bold  ">
