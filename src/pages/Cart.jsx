@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CartNavbar from "./CartNavbar";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import {
   Table,
@@ -12,12 +12,11 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import swal from "sweetalert";
+import Swal from "sweetalert2";
 
 const Cart = () => {
   const [loading, setLoading] = useState(true);
   const [cart, setCart] = useState([]);
-
-  const [userProducts, setUserProducts] = useState([]);
 
   const navigate = useNavigate();
 
@@ -85,6 +84,35 @@ const Cart = () => {
     });
   }
 
+  const deleteCartItem = (e, cart_id) => {
+    e.preventDefault();
+
+    const thisClicked = e.currentTarget;
+    thisClicked.innerText = "Removing";
+
+    axios.delete(`/api/delete-cartItem/` + cart_id).then((res) => {
+      if (res.data.status === 200) {
+        Swal.fire({
+          icon: "success",
+          title: res.data.message,
+          text: "Success!",
+        });
+
+        thisClicked.closest("tr").remove();
+
+      } else if (res.data.status === 404) {
+        Swal.fire({
+          icon: "error",
+          title: res.data.message,
+          text: "Error!",
+        });
+
+        thisClicked.innerText = "Remove";
+      }
+
+    });
+  };
+
   if (loading) {
     return <h4>Loading Cart Details...</h4>;
   }
@@ -150,7 +178,14 @@ const Cart = () => {
                       <TableCell>
                         {item.product_qty * item.product_sellPrice}
                       </TableCell>
-                      <TableCell>Remove</TableCell>
+                      <TableCell>
+                        <button
+                          onClick={(e) => deleteCartItem(e, item.id)}
+                          className="bg-slate-600 text-black hover:text-white p-1 rounded"
+                        >
+                          Remove
+                        </button>
+                      </TableCell>
                     </TableRow>
                   </TableBody>
                 );
@@ -173,9 +208,7 @@ const Cart = () => {
               </div>
               <div className="flex flex-col font-mono gap-4  ">
                 <span className=" flex font-bold  ">{subTotal}</span>
-                <span className=" flex font-bold ">
-                  {deliveryFee}
-                </span>
+                <span className=" flex font-bold ">{deliveryFee}</span>
                 <span className=" flex font-bold ">
                   {subTotal + deliveryFee}
                 </span>
