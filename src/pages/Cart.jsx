@@ -21,8 +21,8 @@ const Cart = () => {
   const navigate = useNavigate();
 
   var subTotal = 0;
-  var grandTotal = 0;
-  var deliveryFee = 15000;
+  
+
 
   useEffect(() => {
     let IsMounted = true;
@@ -99,7 +99,6 @@ const Cart = () => {
         });
 
         thisClicked.closest("tr").remove();
-
       } else if (res.data.status === 404) {
         Swal.fire({
           icon: "error",
@@ -109,7 +108,6 @@ const Cart = () => {
 
         thisClicked.innerText = "Remove";
       }
-
     });
   };
 
@@ -203,20 +201,20 @@ const Cart = () => {
                 <div className="flex flex-col">
                   <span className="font-bold">Sub-total</span>
                 </div>
-                <span className="font-bold">Delivery fee</span>
+
                 <span className="font-bold">Grand Total</span>
               </div>
               <div className="flex flex-col font-mono gap-4  ">
                 <span className=" flex font-bold  ">{subTotal}</span>
-                <span className=" flex font-bold ">{deliveryFee}</span>
+
                 <span className=" flex font-bold ">
-                  {subTotal + deliveryFee}
+                  {subTotal}
                 </span>
               </div>
             </div>
             <div>
               <Link
-                to=""
+                to="/checkout"
                 className="flex bg-blue-400 p-2 rounded-md mt-2 justify-center items-center"
               >
                 Proceed to Checkout

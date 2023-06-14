@@ -16,6 +16,7 @@ import ViewProduct from './components/admin/products/ViewProduct'
 import EditProduct from './components/admin/products/EditProduct'
 import ViewToCart from './pages/collections/ViewToCart'
 import Cart from './pages/Cart'
+import Checkout from './pages/Checkout'
 axios.defaults.baseURL = "http://localhost:8000/";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 axios.defaults.headers.post["Accept"] = "application/json";
@@ -37,6 +38,7 @@ const App = () => {
         <Route path='/' element={<Home/>}/>
         <Route path='/register' element={<Register/>} />
         <Route path='/login' element={<Login/>}/>
+        <Route path='/checkout' element={<Checkout/>}/>
         <Route path='/collections' element={<Collections/>} />
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/collections/:categoryid/:section/:namee' element={<ViewToCart/>}/>
