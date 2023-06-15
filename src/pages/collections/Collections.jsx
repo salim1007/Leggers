@@ -16,6 +16,9 @@ const Collections = () => {
   const [menCasual, setMenCasual] = useState([]);
   const [womenCasual, setWomenCasual] = useState([]);
 
+  
+
+
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -71,6 +74,8 @@ const Collections = () => {
         setWomenCasual(res.data.womenCasual);
       }
     });
+
+   
   }, []);
 
   return (
@@ -107,7 +112,7 @@ const Collections = () => {
         <div className=" mr-4 ml-24 bg-red-600 h-32 rounded-lg p-4 font-bold  ">
           <p>New Products</p>
           <div className=" bg-orange-500 h-16">
-            <p className=" ml-2 mr-2">Visit on holidays</p>
+            <p className=" ml-2 mr-2">Be sure to visit on holidays for the best deals</p>
           </div>
         </div>
        </div>

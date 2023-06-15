@@ -15,9 +15,21 @@ const Checkout = () => {
   const [zip, setZip] = useState("");
   const [postalcode, setPostalcode] = useState("");
 
+
   const [cart, setCart] = useState([]);
 
   var subTotal = 0;
+  let deliveryFee = 0;
+
+  if (country === 'Tanzania') {
+    deliveryFee = 15000;
+  } else if (country === 'Kenya') {
+    deliveryFee = 25000;
+  } else if (country === 'Uganda') {
+    deliveryFee = 28000;
+  }
+
+  var grandTotal = subTotal + deliveryFee;
 
   useEffect(() => {
     axios.get(`/api/cart`).then((res) => {
@@ -115,10 +127,10 @@ const Checkout = () => {
               value={country}
               className=" flex w-72 rounded-md p-2"
             >
-              <option>Country</option>
-              <option>Tanzania</option>
-              <option>Kenya</option>
-              <option>Uganda</option>
+              <option value="">Country</option>
+              <option value="Tanzania">Tanzania</option>
+              <option value="Kenya">Kenya</option>
+              <option value="Uganda">Uganda</option>
             </select>
             <input
               name="city"
@@ -170,23 +182,27 @@ const Checkout = () => {
             </span>
             {cart.map((item) => {
               subTotal += item.product_sellPrice * item.product_qty;
-            }
-            )}
-                <div className=" flex flex-col gap-2 mt-2 mb-3 p-3 ">
-                  <div className=" flex flex-row justify-between">
-                    <span>Sub-Total</span>
-                    <span>{subTotal}</span>
-                  </div>
-                  <div className=" flex flex-row justify-between">
-                    <span>Delivery-Fee</span>
-                    <span>deliveryFee</span>
-                  </div>
-                  <div className=" flex flex-row justify-between font-bold">
-                    <span>Grand-Total</span>
-                    <span>{subTotal}</span>
-                  </div>
-                </div>
-             
+              grandTotal = subTotal + deliveryFee;
+            })}
+            <div className=" flex flex-col gap-2 mt-2 mb-3 p-3 ">
+              <div className=" flex flex-row justify-between">
+                <span>Sub-Total</span>
+                <span>{subTotal}</span>
+              </div>
+              <div className=" flex flex-row justify-between">
+                <span>Delivery-Fee</span>
+                <span>
+                  {country === "" && 0}
+                  {country === "Tanzania" &&  15000}
+                  {country === "Kenya" &&  25000}
+                  {country === "Uganda" &&  28000}
+                </span>
+              </div>
+              <div className=" flex flex-row justify-between font-bold">
+                <span>Grand-Total</span>
+                <span>{grandTotal }</span>
+              </div>
+            </div>
           </div>
           <div className=" flex flex-col bg-blue-400 p-4 rounded h-fit mb-10">
             <span className=" font-bold bg-black text-white p-2 rounded w-full">
@@ -205,15 +221,21 @@ const Checkout = () => {
                   <div className=" flex flex-col gap-3 text-xs">
                     <div className=" flex flex-row gap-5 w-56 justify-between ">
                       <span>Name :</span>
-                      <span className=" font-bold flex float-left">{item.product_name}</span>
+                      <span className=" font-bold flex float-left">
+                        {item.product_name}
+                      </span>
                     </div>
                     <div className=" flex flex-row gap-5 w-56 justify-between ">
                       <span>Qty :</span>
-                      <span className=" font-bold flex float-left">{item.product_qty}</span>
+                      <span className=" font-bold flex float-left">
+                        {item.product_qty}
+                      </span>
                     </div>
                     <div className=" flex flex-row gap-5 w-56 justify-between ">
                       <span>Price :</span>
-                      <span className=" font-bold">{item.product_sellPrice}</span>
+                      <span className=" font-bold">
+                        {item.product_sellPrice}
+                      </span>
                     </div>
                   </div>
                 </div>
