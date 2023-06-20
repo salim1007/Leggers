@@ -27,7 +27,7 @@ const DateTimeDisplay = () => {
   }, [dateTime]);
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-4 mt-3 ml-1 mr-1">
       <span className="flex flex-row justify-between">
         <p>Date: {dateTime.toLocaleDateString()}</p>
         <p>Time: {dateTime.toLocaleTimeString()}</p>

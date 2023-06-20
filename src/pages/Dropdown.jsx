@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function DropdownComponent() {
   const [isOpen, setIsOpen] = useState(false);
@@ -7,10 +8,8 @@ export default function DropdownComponent() {
     setIsOpen(!isOpen);
   };
 
- 
-
   return (
-    <div className="inline-flex bg-amber-200 border rounded-md">
+    <div className="inline-flex bg-amber-200 border rounded-md z-20">
       <a
         href="#"
         className="px-4 py-2 text-sm text-gray-600 hover:text-gray-700 hover:bg-gray-50 rounded-l-md"
@@ -32,31 +31,33 @@ export default function DropdownComponent() {
             stroke="currentColor"
             strokeWidth={2}
           >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M19 9l-7 7-7-7"
+            />
           </svg>
         </button>
 
         {isOpen && (
-          <div className="absolute right-0 z-10 w-56 mt-4 origin-top-right bg-amber-200 border border-gray-100 rounded-md shadow-lg">
+          <div className="absolute right-0 z-20 w-56 mt-4 origin-top-right bg-amber-200 border border-gray-100 rounded-md shadow-lg">
             <div className="p-2">
-              <a
-                href="#"
+              <Link
+                to="/cart"
                 className="block px-4 py-2 text-sm text-black rounded-lg hover:bg-gray-200 hover:text-gray-700"
               >
-                My orders
-              </a>
-              <a
-                href="#"
+                My Cart
+              </Link>
+              <Link
+                to="/collections"
                 className="block px-4 py-2 text-sm text-black rounded-lg hover:bg-gray-200 hover:text-gray-700"
               >
-                Rewards
-              </a>
-              <a
-                href="#"
-                className="block px-4 py-2 text-sm text-black rounded-lg hover:bg-gray-200 hover:text-gray-700"
-              >
+                Collections
+              </Link>
+
+              <button className="block px-4 py-2 text-sm text-black rounded-lg hover:bg-gray-200 hover:text-gray-700">
                 Logout
-              </a>
+              </button>
             </div>
           </div>
         )}

@@ -5,7 +5,7 @@ const MotionText = () => {
   return (
     <div>
       
-        <p className=' text-xl'>
+        <p className=' text-lg ml-2'>
             This is {' '}
             <Typical 
             loop={Infinity}
@@ -13,7 +13,7 @@ const MotionText = () => {
             steps={[
                 'a limited time offer!',
                 1000,
-                'your chance to buy!',
+                'your chance to shop!',
                 1000,
               
               

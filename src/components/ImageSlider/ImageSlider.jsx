@@ -22,9 +22,10 @@ function ImageSlider() {
   // Render the current image
   return (
     <div className="flex flex-row">
-        <img className=" h-56 w-fit rounded-lg rounded-tr-none rounded-br-none" src={images[index]} alt="Slider" />
-        <div className="p-3">
-            <p>Description written on this side of the div</p>
+        <img className=" h-56 w-fit rounded-lg rounded-tr-none rounded-br-none " src={images[index]} alt="Slider" />
+        <div className="p-3 ml-1 text-md flex flex-col gap-3 ">
+            <p>From sporty sneakers to elegant heels, casual loafers to statement boots, our 'Trending' section showcases a wide range of options to suit every occasion and personal style. </p>
+            <p>Take your time to survey!</p>
         </div>
     </div>
   );

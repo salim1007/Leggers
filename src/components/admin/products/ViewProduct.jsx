@@ -10,7 +10,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import AdminNavbar from "../AdminNavbar";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const ViewProduct = () => {
   const [menOfficial, setMenOfficial] = useState([]);
@@ -19,6 +20,37 @@ const ViewProduct = () => {
   const [womenOfficial, setWomenOfficial] = useState([]);
   const [boykids, setBoykids] = useState([]);
   const [girlkids, setGirlkids] = useState([]);
+
+
+  const deleteProduct = (e, id)=>{
+    e.preventDefault();
+
+    const thisClicked = e.currentTarget;
+    thisClicked.innerText = "Deleting";
+
+
+    axios.delete(`/api/deleteProduct/` + id).then(res=>{
+      if (res.data.status === 200) {
+        Swal.fire({
+          icon: "success",
+          title: res.data.message,
+          text: "Success!",
+          timer: 3000,
+        });
+
+        thisClicked.closest("tr").remove();
+      } else if (res.data.status === 404) {
+        Swal.fire({
+          icon: "error",
+          title: res.data.message,
+          text: "Error!",
+          timer: 3000,
+        });
+
+        thisClicked.innerText = "Delete";
+      }
+    });
+  }
 
   useEffect(() => {
     axios.get(`/api/view-product-menOfficial`).then((res) => {
@@ -85,7 +117,7 @@ const ViewProduct = () => {
               <TableBody>
                 {menOfficial.map((item) => {
                   return (
-                    <TableRow>
+                    <TableRow key={item.id}>
                       <TableCell>{item.name}</TableCell>
                       <TableCell>{item.brand_id}</TableCell>
                       <TableCell>{item.category_id}</TableCell>
@@ -105,7 +137,7 @@ const ViewProduct = () => {
                       <TableCell>
                         <div className="flex gap-4">
                           <Link to={`/admin/edit-product/${item.id}`} className=" bg-slate-400 p-2 rounded w-16 justify-center items-center flex  hover:bg-green-200">Edit</Link>
-                          <button className=" bg-slate-400 p-2 rounded w-16 justify-center items-center flex hover:bg-red-400 hover:text-white">Delete</button>
+                          <button onClick={(e) => deleteProduct(e, item.id)} className=" bg-slate-400 p-2 rounded w-16 justify-center items-center flex hover:bg-red-400 hover:text-white">Delete</button>
                         </div>
                       </TableCell>
                     </TableRow>
@@ -137,7 +169,7 @@ const ViewProduct = () => {
               <TableBody>
                 {menCasual.map((item) => {
                   return (
-                    <TableRow>
+                    <TableRow key={item.id}>
                       <TableCell>{item.name}</TableCell>
                       <TableCell>{item.brand_id}</TableCell>
                       <TableCell>{item.category_id}</TableCell>
@@ -157,7 +189,7 @@ const ViewProduct = () => {
                       <TableCell>
                         <div className="flex gap-4">
                           <Link to={`/admin/edit-product/${item.id}`} className=" bg-slate-400 p-2 w-16 justify-center items-center flex rounded hover:bg-green-200">Edit</Link>
-                          <button className=" bg-slate-400 p-2 w-16 justify-center items-center flex rounded hover:bg-red-400 hover:text-white">Delete</button>
+                          <button onClick={(e) => deleteProduct(e, item.id)} className=" bg-slate-400 p-2 w-16 justify-center items-center flex rounded hover:bg-red-400 hover:text-white">Delete</button>
                         </div>
                       </TableCell>
                     </TableRow>
@@ -189,7 +221,7 @@ const ViewProduct = () => {
               <TableBody>
                 {womenOfficial.map((item) => {
                   return (
-                    <TableRow>
+                    <TableRow key={item.id}>
                       <TableCell>{item.name}</TableCell>
                       <TableCell>{item.brand_id}</TableCell>
                       <TableCell>{item.category_id}</TableCell>
@@ -209,7 +241,7 @@ const ViewProduct = () => {
                       <TableCell>
                         <div className="flex gap-4">
                           <Link to={`/admin/edit-product/${item.id}`} className=" bg-slate-400 p-2 rounded w-16 justify-center items-center flex hover:bg-green-200">Edit</Link>
-                          <button className=" bg-slate-400 p-2 rounded w-16 justify-center items-center flex hover:bg-red-400 hover:text-white">Delete</button>
+                          <button onClick={(e) => deleteProduct(e, item.id)} className=" bg-slate-400 p-2 rounded w-16 justify-center items-center flex hover:bg-red-400 hover:text-white">Delete</button>
                         </div>
                       </TableCell>
                     </TableRow>
@@ -241,7 +273,7 @@ const ViewProduct = () => {
               <TableBody>
                 {womenCasual.map((item) => {
                   return (
-                    <TableRow>
+                    <TableRow key={item.id}>
                       <TableCell>{item.name}</TableCell>
                       <TableCell>{item.brand_id}</TableCell>
                       <TableCell>{item.category_id}</TableCell>
@@ -261,7 +293,7 @@ const ViewProduct = () => {
                       <TableCell>
                         <div className="flex gap-4">
                           <Link to={`/admin/edit-product/${item.id}`} className=" bg-slate-400 p-2 rounded w-16 justify-center items-center flex hover:bg-green-200">Edit</Link>
-                          <button className=" bg-slate-400 p-2 rounded w-16 justify-center items-center flex hover:bg-red-400 hover:text-white">Delete</button>
+                          <button onClick={(e) => deleteProduct(e, item.id)} className=" bg-slate-400 p-2 rounded w-16 justify-center items-center flex hover:bg-red-400 hover:text-white">Delete</button>
                         </div>
                       </TableCell>
                     </TableRow>
@@ -293,7 +325,7 @@ const ViewProduct = () => {
               <TableBody>
                 {boykids.map((item) => {
                   return (
-                    <TableRow>
+                    <TableRow key={item.id}>
                       <TableCell>{item.name}</TableCell>
                       <TableCell>{item.brand_id}</TableCell>
                       <TableCell>{item.category_id}</TableCell>
@@ -313,7 +345,7 @@ const ViewProduct = () => {
                       <TableCell>
                         <div className="flex gap-4">
                           <Link to={`/admin/edit-product/${item.id}`} className=" bg-slate-400 p-2 justify-center items-center flex rounded w-16 hover:bg-green-200">Edit</Link>
-                          <button className=" bg-slate-400 p-2 justify-center items-center flex rounded w-16 hover:bg-red-400 hover:text-white">Delete</button>
+                          <button onClick={(e) => deleteProduct(e, item.id)} className=" bg-slate-400 p-2 justify-center items-center flex rounded w-16 hover:bg-red-400 hover:text-white">Delete</button>
                         </div>
                       </TableCell>
                     </TableRow>
@@ -345,7 +377,7 @@ const ViewProduct = () => {
               <TableBody>
                 {girlkids.map((item) => {
                   return (
-                    <TableRow>
+                    <TableRow key={item.id}>
                       <TableCell>{item.name}</TableCell>
                       <TableCell>{item.brand_id}</TableCell>
                       <TableCell>{item.category_id}</TableCell>
@@ -365,7 +397,7 @@ const ViewProduct = () => {
                       <TableCell>
                         <div className="flex gap-4">
                           <Link to={`/admin/edit-product/${item.id}`} className=" bg-slate-400 p-2 justify-center items-center flex rounded w-16 hover:bg-green-200">Edit</Link>
-                          <button className=" bg-slate-400 p-2 justify-center items-center flex rounded w-16 hover:bg-red-400 hover:text-white">Delete</button>
+                          <button onClick={(e) => deleteProduct(e, item.id)} className=" bg-slate-400 p-2 justify-center items-center flex rounded w-16 hover:bg-red-400 hover:text-white">Delete</button>
                         </div>
                       </TableCell>
                     </TableRow>

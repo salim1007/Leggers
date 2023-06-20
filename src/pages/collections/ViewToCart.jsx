@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../../components/admin/products/Navbar";
 import axios from "axios";
 import Carousel from "react-multi-carousel";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const ViewToCart = () => {
   const [fetchAll, setFetchAll] = useState([]);
@@ -174,7 +174,7 @@ const ViewToCart = () => {
                     </div>
                   </div>
 
-                  <div className="flex bg-blue-500 flex-col  w-1/3 h-fit mr-5 p-3 justify-center gap-3 items-center mt-4 mb-4 rounded-md">
+                  <div className="flex bg-blue-500 flex-col  w-2/3 h-fit mr-8 p-3 justify-center gap-3 items-center mt-4 mb-4  rounded-md">
                     <span className=" bg-black text-white p-2 flex justify-center rounded-md w-full font-bold">
                       Product Description
                     </span>
@@ -192,15 +192,15 @@ const ViewToCart = () => {
         <div className=" h-64 flex">
           <div>
             <div className=" bg-green-600 w-screen h-96 flex flex-col justify-evenly p-4  ">
-              <span className=" font-bold mb-2">
-                Other Products you may like:
+              <span className=" font-bold mb-4 bg-gray-800 w-fit p-3 rounded-3xl rounded-l-none ">
+                Other Products you may like
               </span>
               <Carousel responsive={responsive}>
                 {fetchAll.map((item) => {
                   return (
                     <div
                       key={item.id}
-                      className=" bg-slate-600 h-72 w-40 flex flex-col rounded  "
+                      className=" bg-slate-500 h-72 w-40 flex flex-col rounded  "
                     >
                       <img
                         src={`http://localhost:8000/${item.image}`}
@@ -210,11 +210,11 @@ const ViewToCart = () => {
                       <div className=" mt-4  flex flex-col items-center gap-1  ">
                         <h2 className=" text-xs font-bold">{item.name}</h2>
                         <p className=" text-xs">{item.sellingPrice}</p>
-                        <p className=" text-xs">{item.description}</p>
+                        <p className=" text-xs mb-2">{item.description}</p>
                         <p>
-                          <button className="text-xs text-white bg-black p-2 rounded-md">
+                          <Link to={`/collections/${item.category_id}/${item.prSection}/${item.name}`} className="text-xs text-white bg-black p-2 rounded-md">
                             Add to Cart
-                          </button>
+                          </Link>
                         </p>
                       </div>
                     </div>

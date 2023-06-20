@@ -4,9 +4,9 @@ import { useParams } from "react-router-dom";
 import swal from "sweetalert";
 
 const EditProduct = () => {
-  const [categoryFetch, setCateFetch] = useState([]);
+  // const [categoryFetch, setCateFetch] = useState([]);
   const [brandFetch, setBrandFetch] = useState([]);
-  const [sectionFetch, setSectionFetch] = useState([]);
+  // const [sectionFetch, setSectionFetch] = useState([]);
   const [productInputs, setProductInputs] = useState({
     category_id: "",
     brand_id: "",
@@ -37,11 +37,16 @@ const EditProduct = () => {
   useEffect(() => {
     axios.get(`/api/get-category`).then((res) => {
       if (res.data.status === 200) {
-        setCateFetch(res.data.category);
+        // setCateFetch(res.data.category);
         setBrandFetch(res.data.category);
-        setSectionFetch(res.data.category);
       }
     });
+
+    // axios.get(`/api/getAllProducts`).then((res) => {
+    //   if (res.data.status === 200) {
+    //     setSectionFetch(res.data.product);
+    //   }
+    // });
 
     axios.get(`/api/edit-product/` + id).then((res) => {
       if (res.data.status === 200) {
@@ -79,13 +84,19 @@ const EditProduct = () => {
             name="category_id"
           >
             <option>Select Category</option>
-            {categoryFetch.map((item, idx) => {
+            <option>Men (Official)</option>
+            <option>Men (Casual)</option>
+            <option>Women (Official)</option>
+            <option>Women (Casual)</option>
+            <option>Kids (Boys)</option>
+            <option>Kids (Girls)</option>
+            {/* {categoryFetch.map((item, idx) => {
               return (
                 <option value={item.category} key={idx}>
                   {item.category}
                 </option>
               );
-            })}
+            })} */}
           </select>
         </div>
         <div className="flex flex-col w-1/4 gap-2">
@@ -181,18 +192,24 @@ const EditProduct = () => {
             name="prSection"
           >
             <option>Select Section:</option>
-            {sectionFetch.map((item) => {
+            <option>Boys</option>
+            <option>Girls</option>
+            <option>Casual (M)</option>
+            <option>Casual (W)</option>
+            <option>Official (M)</option>
+            <option>Official (W)</option>
+
+            {/* {sectionFetch.map((item) => {
               return (
-                <option value={item.section} key={item.id}>
-                  {item.section}
+                <option value={item.prSection} key={item.id}>
+                  {item.prSection}
                 </option>
               );
-            })}
+            })} */}
           </select>
         </div>
       </div>
       <div className="flex flex-row gap-12 ">
-        
         <div className="flex flex-col w-3/5 gap-2">
           <label htmlFor="description">Description: </label>
           <input
@@ -205,8 +222,11 @@ const EditProduct = () => {
         </div>
         <div className="flex flex-col w-2/5 gap-2">
           <label htmlFor="image">Image: </label>
-         
-          <img src={`http://localhost:8000/${productInputs.image}`} className="rounded-md w-12" />
+
+          <img
+            src={`http://localhost:8000/${productInputs.image}`}
+            className="rounded-md w-12"
+          />
         </div>
       </div>
       <div className="flex flex-row gap-2 mt-4 justify-start">
@@ -230,7 +250,7 @@ const EditProduct = () => {
             className="flex "
             type="checkbox"
             onChange={handleChange}
-            checked={productInputs.featured }
+            checked={productInputs.featured}
             name="featured"
           />
         </div>
