@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Navbar from "./Navbar";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import swal from "sweetalert";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -34,10 +34,21 @@ const Register = () => {
               localStorage.setItem("auth_token", res.data.token);
               localStorage.setItem("auth_name", res.data.username);
 
-              swal("Success", res.data.message,"success");
+              Swal.fire({
+                icon: "success",
+                title: res.data.message,
+                text: "Success!",
+                timer:3000,
+              })
               navigate("/login");
             } else if (res.data.status === 401) {
-              swal( "Fill all fields with required information");
+              Swal.fire({
+                icon: 'error',
+                title: res.data.message,
+                text: 'Error!',
+                timer:3000,
+             
+              })
             }
           });
       });

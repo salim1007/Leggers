@@ -65,16 +65,17 @@ const AddProduct = () => {
     axios.post(`/api/add-product`, formData).then((res) => {
       if (res.data.status === 200) {
         Swal.fire({
-          icon: 'success',
+          icon: "success",
           title: res.data.message,
-          text: 'Success!',
-         
+          text: "Success!",
+          timer: 3000,
         })
       } else if (res.data.status === 400) {
         Swal.fire({
           icon: 'error',
           title: res.data.message,
           text: 'Error!',
+          timer:3000,
           
         })
       }

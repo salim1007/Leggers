@@ -1,4 +1,3 @@
-import { AccountCircle, Flare } from "@mui/icons-material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -52,7 +51,7 @@ const Navbar = () => {
               <Link
                 key={item.id}
                 to={`/collections/${item.category_id}/${item.prSection}/${item.name}`}
-                className=" bg-orange-500 hover:bg-zinc-200 w-72 flex flex-row mt-1 gap-8 rounded-md   "
+                className=" bg-orange-500 hover:bg-zinc-200 w-72 flex flex-row mt-1 gap-8 rounded-md" 
               >
                 <div>
                   <img

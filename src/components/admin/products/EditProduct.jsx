@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import swal from "sweetalert";
+import Swal from "sweetalert2";
 
 const EditProduct = () => {
   // const [categoryFetch, setCateFetch] = useState([]);
@@ -37,16 +37,9 @@ const EditProduct = () => {
   useEffect(() => {
     axios.get(`/api/get-category`).then((res) => {
       if (res.data.status === 200) {
-        // setCateFetch(res.data.category);
         setBrandFetch(res.data.category);
       }
     });
-
-    // axios.get(`/api/getAllProducts`).then((res) => {
-    //   if (res.data.status === 200) {
-    //     setSectionFetch(res.data.product);
-    //   }
-    // });
 
     axios.get(`/api/edit-product/` + id).then((res) => {
       if (res.data.status === 200) {
@@ -59,9 +52,19 @@ const EditProduct = () => {
     e.preventDefault();
     axios.put(`/api/update-product/` + id, productInputs).then((res) => {
       if (res.data.status === 200) {
-        swal("Success", res.data.message, "success");
+        Swal.fire({
+          icon: "success",
+          title: res.data.message,
+          text: "Success!",
+          timer: 3000,
+        });
       } else if (res.data.status === 400) {
-        swal("Error", res.data.message, "error");
+        Swal.fire({
+          icon: "error",
+          title: res.data.message,
+          text: "Error!",
+          timer: 3000,
+        });
       }
     });
   };
@@ -90,13 +93,6 @@ const EditProduct = () => {
             <option>Women (Casual)</option>
             <option>Kids (Boys)</option>
             <option>Kids (Girls)</option>
-            {/* {categoryFetch.map((item, idx) => {
-              return (
-                <option value={item.category} key={idx}>
-                  {item.category}
-                </option>
-              );
-            })} */}
           </select>
         </div>
         <div className="flex flex-col w-1/4 gap-2">
@@ -198,14 +194,6 @@ const EditProduct = () => {
             <option>Casual (W)</option>
             <option>Official (M)</option>
             <option>Official (W)</option>
-
-            {/* {sectionFetch.map((item) => {
-              return (
-                <option value={item.prSection} key={item.id}>
-                  {item.prSection}
-                </option>
-              );
-            })} */}
           </select>
         </div>
       </div>

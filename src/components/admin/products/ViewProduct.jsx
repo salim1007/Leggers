@@ -8,10 +8,9 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Navbar from "./Navbar";
-import AdminNavbar from "../AdminNavbar";
 import { Link, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import DropDownAdminNav from "../../../pages/DropDownAdminNav";
 
 const ViewProduct = () => {
   const [menOfficial, setMenOfficial] = useState([]);
@@ -92,7 +91,14 @@ const ViewProduct = () => {
 
   return (
     <div className="flex flex-col bg-gray-600 relative">
-      <Navbar />
+       <div className=" flex h-fit  bg-zinc-800 p-4 w-full h-0/5 flex-row justify-between drop-shadow-lg   ">
+        <div className=" font-bold text-amber-200">
+          <Link to="/">Home</Link>
+        </div>
+        <div className=" font-bold text-amber-200 ">
+          <DropDownAdminNav/>
+        </div>
+      </div>
       <div className="flex flex-row gap-x-44 h-full w-full ">
         <div className="flex flex-col p-4 mt-6 gap-6">
           <TableContainer>

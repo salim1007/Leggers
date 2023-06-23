@@ -16,10 +16,7 @@ const AdminNavbar = () => {
           <Queue />
           <div>Add Category</div>
         </Link>
-        <Link to="/admin/view-category" className="flex flex-row bg-yellow-500 p-3 gap-2  hover:bg-gray-500 hover:text-white">
-          <LibraryBooks />
-          <div>View Category</div>
-        </Link>
+       
       </div>
       <div>
       <p className="flex ml-3">Product</p>

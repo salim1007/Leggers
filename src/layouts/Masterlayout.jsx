@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import AdminNavbar from "../components/admin/AdminNavbar";
+import DropDownAdminNav from "../pages/DropDownAdminNav";
 const Masterlayout = () => {
   return (
     <div className="flex flex-col h-screen w-screen basis-auto bg-orange-600">
@@ -9,7 +10,7 @@ const Masterlayout = () => {
           <Link to="/">Home</Link>
         </div>
         <div className=" font-bold text-amber-200">
-          <Link to="/collections">Collections</Link>
+          <DropDownAdminNav/>
         </div>
       </div>
       <div className="flex flex-row h-full w-screen bg-green-400">

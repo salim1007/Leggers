@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import CheckOutNav from "./CheckOutNav";
-import Logo from "./collections/images/bw-girl.webp";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -58,14 +57,14 @@ const Checkout = () => {
             icon: "success",
             title: res.data.message,
             text: "Success!",
-            timer: 2000,
+            timer: 3000,
           });
         } else if (res.data.status === 422) {
           Swal.fire({
             icon: "error",
             title: res.data.errors,
             text: "Error!",
-            timer: 2000,
+            timer: 3000,
           });
         }
       });

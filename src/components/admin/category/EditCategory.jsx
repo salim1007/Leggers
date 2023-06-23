@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import swal from "sweetalert";
+import Swal from "sweetalert2";
 
 const EditCategory = () => {
   const [categoryFetch, setCateFetch] = useState([]);
@@ -35,9 +35,19 @@ const EditCategory = () => {
     e.preventDefault();
     axios.put(`/api/update-category/` + id, categoryInput).then((res) => {
       if (res.data.status === 200) {
-        swal("Success", res.data.message);
+        Swal.fire({
+          icon: "success",
+          title: res.data.message,
+          text: "Success!",
+          timer: 3000,
+        });
       } else if (res.data.status === 400) {
-        swal("Error", res.data.message);
+        Swal.fire({
+          icon: "success",
+          title: res.data.message,
+          text: "Success!",
+          timer:3000,
+        });
       }
     });
   };

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Navbar from "./Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import swal from "sweetalert";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -20,14 +20,30 @@ const Login = () => {
             localStorage.setItem("auth_name", res.data.username);
 
             if (res.data.role === "admin") {
-              swal("Success", res.data.message, "success");
+              Swal.fire({
+                icon: "success",
+                title: res.data.message,
+                text: "Success!",
+                timer:3000,
+              })
               navigate("/admin/dashboard");
             } else {
-              swal("Success", res.data.message, "success");
-              navigate("/admin/add-product");
+              Swal.fire({
+                icon: "success",
+                title: res.data.message,
+                text: "Success!",
+                timer:3000,
+              })
+              navigate("/");
             }
           } else if (res.data.status === 401) {
-            swal("Warning!", res.data.message, "warning");
+            Swal.fire({
+              icon: 'error',
+              title: res.data.message,
+              text: 'Error!',
+              timer:3000,
+           
+            })
           }
         });
       });

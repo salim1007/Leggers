@@ -32,6 +32,7 @@ const AddCategory = () => {
             icon: 'success',
             title: res.data.message,
             text: 'Success!',
+            timer:3000,
          
           })
         } else if (res.data.status === 400) {
@@ -39,6 +40,7 @@ const AddCategory = () => {
             icon: 'error',
             title: res.data.message,
             text: 'Error!',
+            timer:3000,
          
           })
         }

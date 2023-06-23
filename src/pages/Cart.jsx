@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CartNavbar from "./CartNavbar";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 
 import {
   Table,
@@ -11,26 +11,24 @@ import {
   TableRow,
 } from "@mui/material";
 import axios from "axios";
-import swal from "sweetalert";
 import Swal from "sweetalert2";
 
 const Cart = () => {
   const [loading, setLoading] = useState(true);
   const [cart, setCart] = useState([]);
 
-  const navigate = useNavigate();
-
   var subTotal = 0;
-  
-
 
   useEffect(() => {
-    let IsMounted = true;
-
     if (!localStorage.getItem("auth_token")) {
-      navigate("/");
-      swal("Warning", "Login to go to Cart Page", "warning");
+      Swal.fire({
+        icon: "warning",
+        title: "Login to Access Cart Page",
+        text: "Warning!",
+        timer: 3000,
+      });
     }
+    let IsMounted = true;
 
     axios.get(`/api/cart`).then((res) => {
       if (IsMounted) {
@@ -38,9 +36,6 @@ const Cart = () => {
           setCart(res.data.cart);
           setLoading(false);
         }
-      } else if (res.data.status === 401) {
-        navigate("/collections");
-        swal("Warning", res.data.message, "warning");
       }
     });
 
@@ -48,6 +43,10 @@ const Cart = () => {
       IsMounted = false;
     };
   }, []);
+
+  if (!localStorage.getItem("auth_token")) {
+    return <Navigate to="/" />;
+  }
 
   const handleIncrement = (cart_id) => {
     setCart((cart) =>
@@ -207,9 +206,7 @@ const Cart = () => {
               <div className="flex flex-col font-mono gap-4  ">
                 <span className=" flex font-bold  ">{subTotal}</span>
 
-                <span className=" flex font-bold ">
-                  {subTotal}
-                </span>
+                <span className=" flex font-bold ">{subTotal}</span>
               </div>
             </div>
             <div>

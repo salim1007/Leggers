@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../../components/admin/products/Navbar";
+import AuthNav from "../../components/admin/products/AuthNav";
 import axios from "axios";
 import Carousel from "react-multi-carousel";
 import { Link, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const ViewToCart = () => {
   const [fetchAll, setFetchAll] = useState([]);
@@ -77,19 +78,43 @@ const ViewToCart = () => {
     axios.post(`/api/add-to-cart`, data).then(res => {
       if(res.data.status === 201){
         
-        swal("Success", res.data.message,"success");
+        Swal.fire({
+          icon: 'success',
+          title: res.data.message,
+          text: 'Success!',
+          timer:3000,
+       
+        })
       
       }
         //Already Added To Cart...
       else if(res.data.status === 409){
-        swal("Success", res.data.message,"success");
+        Swal.fire({
+          icon: 'success',
+          title: res.data.message,
+          text: 'Success!',
+          timer:3000,
+       
+        })
       }
       else if(res.data.status === 401){
-        swal("Error", res.data.message,"error");
+        Swal.fire({
+          icon: 'warning',
+          title: res.data.message,
+          
+          timer:3000,
+       
+        })
       }
       else if(res.data.status === 404){
         console.log(data);
-        swal("Error", res.data.message,"error");
+        Swal.fire({
+          icon: 'error',
+          title: res.data.message,
+          text: 'Error!',
+          timer:3000,
+       
+        })
       }
     });
   }
@@ -117,7 +142,7 @@ const ViewToCart = () => {
   return (
     <div className="flex flex-col h-full w-screen ">
       <div>
-        <Navbar />
+        <AuthNav />
       </div>
 
       <div className="bg-blue-300 flex flex-row justify-between gap-10 w-full ">

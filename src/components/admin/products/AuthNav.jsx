@@ -3,9 +3,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import DropdownComponent from "../../../pages/Dropdown";
 
-const Navbar = () => {
+const AuthNav = () => {
   return (
-    <div className=" bg-zinc-800 p-4 h-0/5 flex flex-row h-fit justify-between drop-shadow-md w-full relative z-10">
+    <div className=" bg-zinc-800 p-4 h-0/5 flex flex-row h-fit justify-between drop-shadow-md w-screen relative z-10">
       <div className=" font-bold text-amber-200">
         <Link to="/">Home</Link>
       </div>
@@ -18,4 +18,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default AuthNav;

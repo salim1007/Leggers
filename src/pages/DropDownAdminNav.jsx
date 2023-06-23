@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-export default function DropdownComponent() {
+export default function DropDownAdminNav() {
   const [isOpen, setIsOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ export default function DropdownComponent() {
   };
 
   return (
-    <div className="inline-flex bg-amber-200 border rounded-md z-20">
+    <div className="inline-flex bg-amber-200 border rounded-md z-20 mr-1">
       <a
         href="#"
         className="px-4 py-2 text-sm text-gray-600 hover:text-gray-700 hover:bg-gray-50 rounded-l-md"
@@ -64,20 +64,10 @@ export default function DropdownComponent() {
         {isOpen && (
           <div className="absolute right-0 z-20 w-56 mt-4 origin-top-right bg-amber-200 border border-gray-100 rounded-md shadow-lg">
             <div className="p-2">
-              <Link
-                to="/cart"
-                className="block px-4 py-2 text-sm text-black rounded-lg hover:bg-gray-200 hover:text-gray-700"
+              <button
+                onClick={logoutOfSystem}
+                className="block px-4 py-2 text-sm text-black rounded-lg hover:bg-gray-200 w-52 hover:text-gray-700"
               >
-                My Cart
-              </Link>
-              <Link
-                to="/collections"
-                className="block px-4 py-2 text-sm text-black rounded-lg hover:bg-gray-200 hover:text-gray-700"
-              >
-                Collections
-              </Link>
-
-              <button onClick={logoutOfSystem} className="block px-4 py-2 text-sm text-black rounded-lg hover:bg-gray-200 hover:text-gray-700">
                 Logout
               </button>
             </div>
