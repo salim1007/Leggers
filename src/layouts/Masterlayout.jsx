@@ -4,7 +4,7 @@ import AdminNavbar from "../components/admin/AdminNavbar";
 import DropDownAdminNav from "../pages/DropDownAdminNav";
 const Masterlayout = () => {
   return (
-    <div className="flex flex-col h-screen w-screen basis-auto bg-orange-600">
+    <div className="flex flex-col h-screen w-screen basis-auto bg-zinc-800 overflow-auto scrollbar-hidden">
       <div className=" flex h-fit  bg-zinc-800 p-4 w-screen h-0/5 flex-row justify-between drop-shadow-lg   ">
         <div className=" font-bold text-amber-200">
           <Link to="/">Home</Link>
@@ -14,10 +14,10 @@ const Masterlayout = () => {
         </div>
       </div>
       <div className="flex flex-row h-full w-screen bg-green-400">
-        <div className="bg-blue-500 h-auto w-72 ">
+        <div className="bg-zinc-800 h-auto w-72 ">
             <AdminNavbar/>
         </div>
-        <div className="bg-gray-600 h-full  w-full">
+        <div className="bg-zinc-600 h-full  w-full">
             <main>
                 <Outlet/>
             </main>

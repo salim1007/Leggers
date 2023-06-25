@@ -60,7 +60,7 @@ const AddCategory = () => {
             type="text"
             onChange={(e) => setCategory(e.target.value)}
             value={category}
-            className="rounded bg-gray-500 p-2"
+            className="rounded bg-zinc-500 p-2"
             name="category"
           >
             <option>Men (Official)</option>
@@ -78,7 +78,7 @@ const AddCategory = () => {
             type="text"
             onChange={(e) => setOrigin(e.target.value)}
             value={origin}
-            className="rounded bg-gray-500 p-2"
+            className="rounded bg-zinc-500 p-2"
             name="origin"
           />
         </div>
@@ -90,7 +90,7 @@ const AddCategory = () => {
             type="text"
             onChange={(e) => setBrandName(e.target.value)}
             value={brandName}
-            className="rounded bg-gray-500 p-2"
+            className="rounded bg-zinc-500 p-2"
             name="brandName"
           />
         </div>
@@ -100,7 +100,7 @@ const AddCategory = () => {
             type="text"
             onChange={(e) => setFreshness(e.target.value)}
             value={freshness}
-            className="rounded bg-gray-500 p-2"
+            className="rounded bg-zinc-500 p-2"
             name="freshness"
           />
         </div>
@@ -112,7 +112,7 @@ const AddCategory = () => {
           onChange={(e) => setDescription(e.target.value)}
           value={description}
           name="description"
-          className=" rounded bg-gray-500 p-5"
+          className=" rounded bg-zinc-500 p-5"
         />
       </div>
       <div className="flex gap-1 text-sm">
@@ -121,7 +121,7 @@ const AddCategory = () => {
           onChange={(e) => setStatus(e.target.checked)}
           checked={status}
           name="status"
-          className=" rounded bg-gray-500 p-5"
+          className=" rounded bg-zinc-500 p-5"
         />
         <label htmlFor="description">
           <b>Status</b> (show when checked){" "}
@@ -130,7 +130,7 @@ const AddCategory = () => {
       <div className="flex justify-center ">
         <button
           type="submit"
-          className=" bg-gray-800 text-gray-400 p-2 pr-6 pl-6 rounded-md hover:bg-black hover:text-white "
+          className=" bg-zinc-800 text-gray-400 p-2 pr-6 pl-6 rounded-md hover:bg-black hover:text-white "
         >
           Add
         </button>

@@ -48,9 +48,9 @@ const Dashboard = () => {
                 </div>
               </div>
               <span className="mt-12 font-bold italic">
-                Access the Sidebar to <i className="text-yellow-500">Add</i> ,{" "}
-                <i className="text-yellow-500">Update</i> or{" "}
-                <i className="text-yellow-500">Remove</i> Products details
+                Access the Sidebar to <i className="text-amber-500">Add</i> ,{" "}
+                <i className="text-amber-500">Update</i> or{" "}
+                <i className="text-amber-500">Remove</i> Products details
               </span>
             </div>
           </div>

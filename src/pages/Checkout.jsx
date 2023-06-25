@@ -71,17 +71,17 @@ const Checkout = () => {
   };
 
   return (
-    <div>
+    <div className=" flex flex-col h-screen overflow-auto scrollbar-hidden ">
       <div>
         <CheckOutNav />
       </div>
-      <div className=" bg-amber-600 p-4 h-8 italic items-center flex flex-row justify-start drop-shadow-lg w-full ">
+      <div className=" bg-amber-600 p-4 h-8 italic items-center flex flex-row justify-start drop-shadow-xl w-full ">
         Fill in your Checkout Details to place your Order
       </div>
-      <div className=" flex flex-row justify-between bg-gray-600 p-5 gap-6 h-fit">
+      <div className=" flex flex-row justify-between bg-amber-600 p-5 gap-6 h-fit">
         <form
           onSubmit={submitOrder}
-          className="flex flex-col gap-7 bg-amber-600 p-5 w-1/2 rounded-md mt-4 h-fit ml-8 text-sm"
+          className="flex flex-col shadow-xl gap-7 bg-gray-600 p-5 w-1/2 rounded-2xl mt-4 h-fit ml-8 text-sm"
         >
           <div className="flex justify-between gap-8 mt-3">
             <input
@@ -90,7 +90,7 @@ const Checkout = () => {
               onChange={(e) => setFirstname(e.target.value)}
               value={firstname}
               placeholder="First Name"
-              className=" flex w-72 rounded-md p-2"
+              className=" flex w-72 rounded-md p-2 bg-gray-500"
             />
             <input
               name="lastname"
@@ -98,7 +98,7 @@ const Checkout = () => {
               onChange={(e) => setLastname(e.target.value)}
               value={lastname}
               placeholder="Last Name"
-              className=" flex w-72 rounded-md p-2"
+              className=" flex w-72 rounded-md p-2 bg-gray-500"
             />
           </div>
           <div className="flex justify-between gap-8">
@@ -108,7 +108,7 @@ const Checkout = () => {
               onChange={(e) => setEmail(e.target.value)}
               value={email}
               placeholder="Email"
-              className=" flex w-72 rounded-md p-2"
+              className=" flex w-72 rounded-md p-2 bg-gray-500"
             />
             <input
               name="phone"
@@ -116,7 +116,7 @@ const Checkout = () => {
               onChange={(e) => setPhone(e.target.value)}
               value={phone}
               placeholder="Phone No."
-              className=" flex w-72 rounded-md p-2"
+              className=" flex w-72 rounded-md p-2 bg-gray-500"
             />
           </div>
           <div className="flex justify-between gap-8">
@@ -124,7 +124,7 @@ const Checkout = () => {
               name="country"
               onChange={(e) => setCountry(e.target.value)}
               value={country}
-              className=" flex w-72 rounded-md p-2"
+              className=" flex w-72 rounded-md p-2 bg-gray-500"
             >
               <option value="">Country</option>
               <option value="Tanzania">Tanzania</option>
@@ -137,7 +137,7 @@ const Checkout = () => {
               onChange={(e) => setCity(e.target.value)}
               value={city}
               placeholder="City"
-              className=" flex w-72 rounded-md p-2"
+              className=" flex w-72 rounded-md p-2 bg-gray-500"
             />
           </div>
           <div className="flex justify-between gap-8">
@@ -147,7 +147,7 @@ const Checkout = () => {
               onChange={(e) => setStateName(e.target.value)}
               value={state}
               placeholder="State"
-              className=" flex w-72 rounded-md p-2"
+              className=" flex w-72 rounded-md p-2 bg-gray-500"
             />
             <input
               name="zip"
@@ -155,7 +155,7 @@ const Checkout = () => {
               onChange={(e) => setZip(e.target.value)}
               value={zip}
               placeholder="Zip"
-              className=" flex w-72 rounded-md p-2"
+              className=" flex w-72 rounded-md p-2 bg-gray-500"
             />
           </div>
           <div className="flex justify-between gap-8">
@@ -165,17 +165,17 @@ const Checkout = () => {
               onChange={(e) => setPostalcode(e.target.value)}
               value={postalcode}
               placeholder="Postal Code"
-              className=" flex w-full rounded-md p-2"
+              className=" flex w-full rounded-md p-2 bg-gray-500"
             />
           </div>
           <span className=" flex justify-center items-center p-2 rounded-md">
-            <button type="submit" className=" bg-blue-300 p-2 rounded-md w-32">
+            <button type="submit" className=" bg-black text-white hover:text-amber-200 hover:bg-zinc-600 p-2 rounded-md w-32">
               Place Order
             </button>
           </span>
         </form>
         <div className=" flex flex-col w-1/3 gap-8  mt-4 mr-8 ">
-          <div className=" flex flex-col bg-blue-400 p-4 rounded h-fit">
+          <div className=" flex flex-col bg-gray-600 p-4 rounded h-fit shadow-xl">
             <span className=" font-bold bg-black text-white p-2 rounded">
               Order Summary
             </span>
@@ -203,7 +203,7 @@ const Checkout = () => {
               </div>
             </div>
           </div>
-          <div className=" flex flex-col bg-blue-400 p-4 rounded h-fit mb-10">
+          <div className=" flex flex-col bg-gray-600 p-4 rounded h-fit mb-10 shadow-xl">
             <span className=" font-bold bg-black text-white p-2 rounded w-full">
               Cart Summary
             </span>

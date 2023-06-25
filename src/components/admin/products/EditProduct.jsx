@@ -83,7 +83,7 @@ const EditProduct = () => {
             type="text"
             onChange={handleChange}
             value={productInputs.category_id || ""}
-            className=" bg-gray-500 rounded p-2"
+            className=" bg-zinc-500 rounded p-2"
             name="category_id"
           >
             <option>Select Category</option>
@@ -101,7 +101,7 @@ const EditProduct = () => {
             type="text"
             onChange={handleChange}
             value={productInputs.brand_id || ""}
-            className=" bg-gray-500 rounded p-2"
+            className=" bg-zinc-500 rounded p-2"
             name="brand_id"
           >
             <option>Select Brand</option>
@@ -120,7 +120,7 @@ const EditProduct = () => {
             type="text"
             onChange={handleChange}
             value={productInputs.originalPrice || ""}
-            className=" bg-gray-500 rounded p-2"
+            className=" bg-zinc-500 rounded p-2"
             name="originalPrice"
           />
         </div>
@@ -132,7 +132,7 @@ const EditProduct = () => {
             type="text"
             onChange={handleChange}
             value={productInputs.name || ""}
-            className=" bg-gray-500 rounded p-2"
+            className=" bg-zinc-500 rounded p-2"
             name="name"
           />
         </div>
@@ -142,7 +142,7 @@ const EditProduct = () => {
             type="text"
             onChange={handleChange}
             value={productInputs.colour || ""}
-            className=" bg-gray-500 rounded p-2"
+            className=" bg-zinc-500 rounded p-2"
             name="colour"
           />
         </div>
@@ -152,7 +152,7 @@ const EditProduct = () => {
             type="text"
             onChange={handleChange}
             value={productInputs.sellingPrice || ""}
-            className=" bg-gray-500 rounded p-2"
+            className=" bg-zinc-500 rounded p-2"
             name="sellingPrice"
           />
         </div>
@@ -164,7 +164,7 @@ const EditProduct = () => {
             type="text"
             onChange={handleChange}
             value={productInputs.qty || ""}
-            className=" bg-gray-500 rounded p-2"
+            className=" bg-zinc-500 rounded p-2"
             name="qty"
           />
         </div>
@@ -174,7 +174,7 @@ const EditProduct = () => {
             type="text"
             onChange={handleChange}
             value={productInputs.size || ""}
-            className=" bg-gray-500 rounded p-2"
+            className=" bg-zinc-500 rounded p-2"
             name="size"
           />
         </div>
@@ -184,7 +184,7 @@ const EditProduct = () => {
             type="text"
             onChange={handleChange}
             value={productInputs.prSection || ""}
-            className=" bg-gray-500 rounded p-2"
+            className=" bg-zinc-500 rounded p-2"
             name="prSection"
           >
             <option>Select Section:</option>
@@ -204,7 +204,7 @@ const EditProduct = () => {
             type="text"
             onChange={handleChange}
             value={productInputs.description || ""}
-            className=" bg-gray-500 rounded p-3"
+            className=" bg-zinc-500 rounded p-3"
             name="description"
           />
         </div>

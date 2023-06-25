@@ -20,15 +20,13 @@ const ViewProduct = () => {
   const [boykids, setBoykids] = useState([]);
   const [girlkids, setGirlkids] = useState([]);
 
-
-  const deleteProduct = (e, id)=>{
+  const deleteProduct = (e, id) => {
     e.preventDefault();
 
     const thisClicked = e.currentTarget;
     thisClicked.innerText = "Deleting";
 
-
-    axios.delete(`/api/deleteProduct/` + id).then(res=>{
+    axios.delete(`/api/deleteProduct/` + id).then((res) => {
       if (res.data.status === 200) {
         Swal.fire({
           icon: "success",
@@ -49,7 +47,7 @@ const ViewProduct = () => {
         thisClicked.innerText = "Delete";
       }
     });
-  }
+  };
 
   useEffect(() => {
     axios.get(`/api/view-product-menOfficial`).then((res) => {
@@ -90,16 +88,9 @@ const ViewProduct = () => {
   }, []);
 
   return (
-    <div className="flex flex-col bg-gray-600 relative">
-       <div className=" flex h-fit  bg-zinc-800 p-4 w-full h-0/5 flex-row justify-between drop-shadow-lg   ">
-        <div className=" font-bold text-amber-200">
-          <Link to="/">Home</Link>
-        </div>
-        <div className=" font-bold text-amber-200 ">
-          <DropDownAdminNav/>
-        </div>
-      </div>
-      <div className="flex flex-row gap-x-44 h-full w-full ">
+   <div className=" flex flex-col h-full justify-center">
+     <div className="flex flex-col bg-zinc-600 overflow-y-auto   ">
+      <div className="flex flex-row gap-x-44 h-full w-full  ">
         <div className="flex flex-col p-4 mt-6 gap-6">
           <TableContainer>
             <span className="font-bold ml-2 italic">Men (Official)</span>
@@ -109,13 +100,8 @@ const ViewProduct = () => {
                   <TableCell>Name</TableCell>
                   <TableCell>Brand</TableCell>
                   <TableCell>Category</TableCell>
-                  <TableCell>Orig.Price</TableCell>
-                  <TableCell>Sell.Price</TableCell>
-                  <TableCell>Section</TableCell>
-                  <TableCell>Colour</TableCell>
-                  <TableCell>Quantity</TableCell>
-                  <TableCell>Size</TableCell>
-                  <TableCell>Status</TableCell>
+                  <TableCell>Selling Price</TableCell>
+                  <TableCell>Quantity Left</TableCell>
                   <TableCell>Image</TableCell>
                   <TableCell>Action</TableCell>
                 </TableRow>
@@ -127,13 +113,8 @@ const ViewProduct = () => {
                       <TableCell>{item.name}</TableCell>
                       <TableCell>{item.brand_id}</TableCell>
                       <TableCell>{item.category_id}</TableCell>
-                      <TableCell>{item.originalPrice}</TableCell>
                       <TableCell>{item.sellingPrice}</TableCell>
-                      <TableCell>{item.prSection}</TableCell>
-                      <TableCell>{item.colour}</TableCell>
                       <TableCell>{item.qty}</TableCell>
-                      <TableCell>{item.size}</TableCell>
-                      <TableCell>{item.status}</TableCell>
                       <TableCell>
                         <img
                           className=" object-scale-down h-20 w-20 rounded-md"
@@ -142,8 +123,19 @@ const ViewProduct = () => {
                       </TableCell>
                       <TableCell>
                         <div className="flex gap-4">
-                          <Link to={`/admin/edit-product/${item.id}`} className=" bg-slate-400 p-2 rounded w-16 justify-center items-center flex  hover:bg-green-200">Edit</Link>
-                          <button onClick={(e) => deleteProduct(e, item.id)} className=" bg-slate-400 p-2 rounded w-16 justify-center items-center flex hover:bg-red-400 hover:text-white">Delete</button>
+                          <Link
+                            to={`/admin/edit-product/${item.id}`}
+                            className=" bg-slate-400 p-2 rounded w-16 justify-center items-center flex  hover:bg-zinc-800 hover:text-green-500"
+                          >
+                            Edit
+                          </Link>
+                          <button
+                            onClick={(e) => deleteProduct(e, item.id)}
+                            className=" bg-slate-400 p-2 rounded w-16 justify-center items-center flex hover:bg-zinc-800 hover:text-red-500"
+
+                          >
+                            Delete
+                          </button>
                         </div>
                       </TableCell>
                     </TableRow>
@@ -161,13 +153,8 @@ const ViewProduct = () => {
                   <TableCell>Name</TableCell>
                   <TableCell>Brand</TableCell>
                   <TableCell>Category</TableCell>
-                  <TableCell>Orig.Price</TableCell>
-                  <TableCell>Sell.Price</TableCell>
-                  <TableCell>Section</TableCell>
-                  <TableCell>Colour</TableCell>
-                  <TableCell>Quantity</TableCell>
-                  <TableCell>Size</TableCell>
-                  <TableCell>Status</TableCell>
+                  <TableCell>Selling Price</TableCell>
+                  <TableCell>Quantity Left</TableCell>
                   <TableCell>Image</TableCell>
                   <TableCell>Action</TableCell>
                 </TableRow>
@@ -179,13 +166,8 @@ const ViewProduct = () => {
                       <TableCell>{item.name}</TableCell>
                       <TableCell>{item.brand_id}</TableCell>
                       <TableCell>{item.category_id}</TableCell>
-                      <TableCell>{item.originalPrice}</TableCell>
                       <TableCell>{item.sellingPrice}</TableCell>
-                      <TableCell>{item.prSection}</TableCell>
-                      <TableCell>{item.colour}</TableCell>
                       <TableCell>{item.qty}</TableCell>
-                      <TableCell>{item.size}</TableCell>
-                      <TableCell>{item.status}</TableCell>
                       <TableCell>
                         <img
                           className=" object-scale-down h-20 w-20 rounded-md"
@@ -194,8 +176,19 @@ const ViewProduct = () => {
                       </TableCell>
                       <TableCell>
                         <div className="flex gap-4">
-                          <Link to={`/admin/edit-product/${item.id}`} className=" bg-slate-400 p-2 w-16 justify-center items-center flex rounded hover:bg-green-200">Edit</Link>
-                          <button onClick={(e) => deleteProduct(e, item.id)} className=" bg-slate-400 p-2 w-16 justify-center items-center flex rounded hover:bg-red-400 hover:text-white">Delete</button>
+                          <Link
+                            to={`/admin/edit-product/${item.id}`}
+                            className=" bg-slate-400 p-2 rounded w-16 justify-center items-center flex  hover:bg-zinc-800 hover:text-green-500"
+                          >
+                            Edit
+                          </Link>
+                          <button
+                            onClick={(e) => deleteProduct(e, item.id)}
+                            className=" bg-slate-400 p-2 rounded w-16 justify-center items-center flex hover:bg-zinc-800 hover:text-red-500"
+
+                          >
+                            Delete
+                          </button>
                         </div>
                       </TableCell>
                     </TableRow>
@@ -213,13 +206,8 @@ const ViewProduct = () => {
                   <TableCell>Name</TableCell>
                   <TableCell>Brand</TableCell>
                   <TableCell>Category</TableCell>
-                  <TableCell>Orig.Price</TableCell>
-                  <TableCell>Sell.Price</TableCell>
-                  <TableCell>Section</TableCell>
-                  <TableCell>Colour</TableCell>
-                  <TableCell>Quantity</TableCell>
-                  <TableCell>Size</TableCell>
-                  <TableCell>Status</TableCell>
+                  <TableCell>Selling Price</TableCell>
+                  <TableCell>Quantity Left</TableCell>
                   <TableCell>Image</TableCell>
                   <TableCell>Action</TableCell>
                 </TableRow>
@@ -231,13 +219,8 @@ const ViewProduct = () => {
                       <TableCell>{item.name}</TableCell>
                       <TableCell>{item.brand_id}</TableCell>
                       <TableCell>{item.category_id}</TableCell>
-                      <TableCell>{item.originalPrice}</TableCell>
                       <TableCell>{item.sellingPrice}</TableCell>
-                      <TableCell>{item.prSection}</TableCell>
-                      <TableCell>{item.colour}</TableCell>
                       <TableCell>{item.qty}</TableCell>
-                      <TableCell>{item.size}</TableCell>
-                      <TableCell>{item.status}</TableCell>
                       <TableCell>
                         <img
                           className=" object-scale-down h-20 w-20 rounded-md"
@@ -246,8 +229,19 @@ const ViewProduct = () => {
                       </TableCell>
                       <TableCell>
                         <div className="flex gap-4">
-                          <Link to={`/admin/edit-product/${item.id}`} className=" bg-slate-400 p-2 rounded w-16 justify-center items-center flex hover:bg-green-200">Edit</Link>
-                          <button onClick={(e) => deleteProduct(e, item.id)} className=" bg-slate-400 p-2 rounded w-16 justify-center items-center flex hover:bg-red-400 hover:text-white">Delete</button>
+                          <Link
+                            to={`/admin/edit-product/${item.id}`}
+                            className=" bg-slate-400 p-2 rounded w-16 justify-center items-center flex  hover:bg-zinc-800 hover:text-green-500"
+                          >
+                            Edit
+                          </Link>
+                          <button
+                            onClick={(e) => deleteProduct(e, item.id)}
+                            className=" bg-slate-400 p-2 rounded w-16 justify-center items-center flex hover:bg-zinc-800 hover:text-red-500"
+
+                          >
+                            Delete
+                          </button>
                         </div>
                       </TableCell>
                     </TableRow>
@@ -265,13 +259,8 @@ const ViewProduct = () => {
                   <TableCell>Name</TableCell>
                   <TableCell>Brand</TableCell>
                   <TableCell>Category</TableCell>
-                  <TableCell>Orig.Price</TableCell>
-                  <TableCell>Sell.Price</TableCell>
-                  <TableCell>Section</TableCell>
-                  <TableCell>Colour</TableCell>
-                  <TableCell>Quantity</TableCell>
-                  <TableCell>Size</TableCell>
-                  <TableCell>Status</TableCell>
+                  <TableCell>Selling Price</TableCell>
+                  <TableCell>Quantity Left</TableCell>
                   <TableCell>Image</TableCell>
                   <TableCell>Action</TableCell>
                 </TableRow>
@@ -283,13 +272,8 @@ const ViewProduct = () => {
                       <TableCell>{item.name}</TableCell>
                       <TableCell>{item.brand_id}</TableCell>
                       <TableCell>{item.category_id}</TableCell>
-                      <TableCell>{item.originalPrice}</TableCell>
                       <TableCell>{item.sellingPrice}</TableCell>
-                      <TableCell>{item.prSection}</TableCell>
-                      <TableCell>{item.colour}</TableCell>
                       <TableCell>{item.qty}</TableCell>
-                      <TableCell>{item.size}</TableCell>
-                      <TableCell>{item.status}</TableCell>
                       <TableCell>
                         <img
                           className=" object-scale-down h-20 w-20 rounded-md"
@@ -298,8 +282,19 @@ const ViewProduct = () => {
                       </TableCell>
                       <TableCell>
                         <div className="flex gap-4">
-                          <Link to={`/admin/edit-product/${item.id}`} className=" bg-slate-400 p-2 rounded w-16 justify-center items-center flex hover:bg-green-200">Edit</Link>
-                          <button onClick={(e) => deleteProduct(e, item.id)} className=" bg-slate-400 p-2 rounded w-16 justify-center items-center flex hover:bg-red-400 hover:text-white">Delete</button>
+                          <Link
+                            to={`/admin/edit-product/${item.id}`}
+                            className=" bg-slate-400 p-2 rounded w-16 justify-center items-center flex  hover:bg-zinc-800 hover:text-green-500"
+                          >
+                            Edit
+                          </Link>
+                          <button
+                            onClick={(e) => deleteProduct(e, item.id)}
+                            className=" bg-slate-400 p-2 rounded w-16 justify-center items-center flex hover:bg-zinc-800 hover:text-red-500"
+
+                          >
+                            Delete
+                          </button>
                         </div>
                       </TableCell>
                     </TableRow>
@@ -317,13 +312,8 @@ const ViewProduct = () => {
                   <TableCell>Name</TableCell>
                   <TableCell>Brand</TableCell>
                   <TableCell>Category</TableCell>
-                  <TableCell>Orig.Price</TableCell>
-                  <TableCell>Sell.Price</TableCell>
-                  <TableCell>Section</TableCell>
-                  <TableCell>Colour</TableCell>
-                  <TableCell>Quantity</TableCell>
-                  <TableCell>Size</TableCell>
-                  <TableCell>Status</TableCell>
+                  <TableCell>Selling Price</TableCell>
+                  <TableCell>Quantity Left</TableCell>
                   <TableCell>Image</TableCell>
                   <TableCell>Action</TableCell>
                 </TableRow>
@@ -335,13 +325,8 @@ const ViewProduct = () => {
                       <TableCell>{item.name}</TableCell>
                       <TableCell>{item.brand_id}</TableCell>
                       <TableCell>{item.category_id}</TableCell>
-                      <TableCell>{item.originalPrice}</TableCell>
                       <TableCell>{item.sellingPrice}</TableCell>
-                      <TableCell>{item.prSection}</TableCell>
-                      <TableCell>{item.colour}</TableCell>
                       <TableCell>{item.qty}</TableCell>
-                      <TableCell>{item.size}</TableCell>
-                      <TableCell>{item.status}</TableCell>
                       <TableCell>
                         <img
                           className=" object-scale-down h-20 w-20 rounded-md"
@@ -350,8 +335,19 @@ const ViewProduct = () => {
                       </TableCell>
                       <TableCell>
                         <div className="flex gap-4">
-                          <Link to={`/admin/edit-product/${item.id}`} className=" bg-slate-400 p-2 justify-center items-center flex rounded w-16 hover:bg-green-200">Edit</Link>
-                          <button onClick={(e) => deleteProduct(e, item.id)} className=" bg-slate-400 p-2 justify-center items-center flex rounded w-16 hover:bg-red-400 hover:text-white">Delete</button>
+                          <Link
+                            to={`/admin/edit-product/${item.id}`}
+                            className=" bg-slate-400 p-2 rounded w-16 justify-center items-center flex  hover:bg-zinc-800 hover:text-green-500"
+                          >
+                            Edit
+                          </Link>
+                          <button
+                            onClick={(e) => deleteProduct(e, item.id)}
+                            className=" bg-slate-400 p-2 rounded w-16 justify-center items-center flex hover:bg-zinc-800 hover:text-red-500"
+
+                          >
+                            Delete
+                          </button>
                         </div>
                       </TableCell>
                     </TableRow>
@@ -369,13 +365,8 @@ const ViewProduct = () => {
                   <TableCell>Name</TableCell>
                   <TableCell>Brand</TableCell>
                   <TableCell>Category</TableCell>
-                  <TableCell>Orig.Price</TableCell>
-                  <TableCell>Sell.Price</TableCell>
-                  <TableCell>Section</TableCell>
-                  <TableCell>Colour</TableCell>
-                  <TableCell>Quantity</TableCell>
-                  <TableCell>Size</TableCell>
-                  <TableCell>Status</TableCell>
+                  <TableCell>Selling Price</TableCell>
+                  <TableCell>Quantity Left</TableCell>
                   <TableCell>Image</TableCell>
                   <TableCell>Action</TableCell>
                 </TableRow>
@@ -387,13 +378,8 @@ const ViewProduct = () => {
                       <TableCell>{item.name}</TableCell>
                       <TableCell>{item.brand_id}</TableCell>
                       <TableCell>{item.category_id}</TableCell>
-                      <TableCell>{item.originalPrice}</TableCell>
                       <TableCell>{item.sellingPrice}</TableCell>
-                      <TableCell>{item.prSection}</TableCell>
-                      <TableCell>{item.colour}</TableCell>
                       <TableCell>{item.qty}</TableCell>
-                      <TableCell>{item.size}</TableCell>
-                      <TableCell>{item.status}</TableCell>
                       <TableCell>
                         <img
                           className=" object-scale-down h-20 w-20 rounded-md"
@@ -402,8 +388,18 @@ const ViewProduct = () => {
                       </TableCell>
                       <TableCell>
                         <div className="flex gap-4">
-                          <Link to={`/admin/edit-product/${item.id}`} className=" bg-slate-400 p-2 justify-center items-center flex rounded w-16 hover:bg-green-200">Edit</Link>
-                          <button onClick={(e) => deleteProduct(e, item.id)} className=" bg-slate-400 p-2 justify-center items-center flex rounded w-16 hover:bg-red-400 hover:text-white">Delete</button>
+                          <Link
+                            to={`/admin/edit-product/${item.id}`}
+                            className=" bg-slate-400 p-2 rounded w-16 justify-center items-center flex  hover:bg-zinc-800 hover:text-green-500"
+                          >
+                            Edit
+                          </Link>
+                          <button
+                            onClick={(e) => deleteProduct(e, item.id)}
+                            className=" bg-slate-400 p-2 rounded w-16 justify-center items-center flex hover:bg-zinc-800 hover:text-red-500"
+                          >
+                            Delete
+                          </button>
                         </div>
                       </TableCell>
                     </TableRow>
@@ -415,6 +411,7 @@ const ViewProduct = () => {
         </div>
       </div>
     </div>
+   </div>
   );
 };
 

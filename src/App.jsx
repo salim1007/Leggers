@@ -42,14 +42,14 @@ const App = () => {
         <Route path='/collections' element={<Collections/>} />
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/collections/:categoryid/:section/:namee' element={<ViewToCart/>}/>
-        <Route path='/admin/view-product' element={<ViewProduct/>}/>
         <Route path='/admin' element={<Masterlayout/>}>
           <Route path='/admin/dashboard' element={<Dashboard/>} />
           <Route path='/admin/add-category' element={<AddCategory/>}/>
           <Route path='/admin/add-product' element={<AddProduct/>} />
           <Route path='/admin/edit-category/:id' element={<EditCategory/>} />
           <Route path='/admin/edit-product/:id' element={<EditProduct/>}/>
-         
+          <Route path='/admin/view-product' element={<ViewProduct/>}/>
+
         </Route>
        
 

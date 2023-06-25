@@ -92,7 +92,7 @@ const AddProduct = () => {
             type="text"
             onChange={(e) => setCategoryId(e.target.value)}
             value={category_id}
-            className=" bg-gray-500 rounded p-2"
+            className=" bg-zinc-500 rounded p-2"
             name="category_id"
           >
             <option>Select Category</option>
@@ -111,7 +111,7 @@ const AddProduct = () => {
             type="text"
             onChange={(e) => setBrandId(e.target.value)}
             value={brand_id}
-            className=" bg-gray-500 rounded p-2"
+            className=" bg-zinc-500 rounded p-2"
             name="brand_id"
           >
             <option>Select Brand</option>
@@ -130,7 +130,7 @@ const AddProduct = () => {
             type="text"
             onChange={(e) => setOriginalPrice(e.target.value)}
             value={originalPrice}
-            className=" bg-gray-500 rounded p-2"
+            className=" bg-zinc-500 rounded p-2"
             name="originalPrice"
           />
         </div>
@@ -142,7 +142,7 @@ const AddProduct = () => {
             type="text"
             onChange={(e) => setName(e.target.value)}
             value={name}
-            className=" bg-gray-500 rounded p-2"
+            className=" bg-zinc-500 rounded p-2"
             name="name"
           />
         </div>
@@ -152,7 +152,7 @@ const AddProduct = () => {
             type="text"
             onChange={(e) => setColour(e.target.value)}
             value={colour}
-            className=" bg-gray-500 rounded p-2"
+            className=" bg-zinc-500 rounded p-2"
             name="colour"
           />
         </div>
@@ -162,7 +162,7 @@ const AddProduct = () => {
             type="text"
             onChange={(e) => setSellingPrice(e.target.value)}
             value={sellingPrice}
-            className=" bg-gray-500 rounded p-2"
+            className=" bg-zinc-500 rounded p-2"
             name="sellingPrice"
           />
         </div>
@@ -174,7 +174,7 @@ const AddProduct = () => {
             type="text"
             onChange={(e) => setQty(e.target.value)}
             value={qty}
-            className=" bg-gray-500 rounded p-2"
+            className=" bg-zinc-500 rounded p-2"
             name="qty"
           />
         </div>
@@ -184,7 +184,7 @@ const AddProduct = () => {
             type="text"
             onChange={(e) => setSize(e.target.value)}
             value={size}
-            className=" bg-gray-500 rounded p-2"
+            className=" bg-zinc-500 rounded p-2"
             name="size"
           />
         </div>
@@ -194,7 +194,7 @@ const AddProduct = () => {
             type="text"
             onChange={(e) => setSection(e.target.value)}
             value={prSection}
-            className=" bg-gray-500 rounded p-2"
+            className=" bg-zinc-500 rounded p-2"
             name="prSection"
           >
             <option>Official (M)</option>
@@ -212,7 +212,7 @@ const AddProduct = () => {
           <input
             type="file"
             onChange={handleImage}
-            className=" bg-gray-500 rounded p-2"
+            className=" bg-zinc-500 rounded p-2"
             name="image"
           />
         </div>
@@ -222,7 +222,7 @@ const AddProduct = () => {
             type="text"
             onChange={(e) => setDescription(e.target.value)}
             value={description}
-            className=" bg-gray-500 rounded p-3"
+            className=" bg-zinc-500 rounded p-3"
             name="description"
           />
         </div>
