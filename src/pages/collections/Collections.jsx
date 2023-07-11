@@ -417,7 +417,7 @@ const Collections = () => {
           <Link>
             <FaFacebook className="mr-2 text-blue-500 text-2xl" />
           </Link>
-          <Link>
+          <Link to={''} target="_blank" rel="noopener noreferrer">
             <FaInstagram className="mr-2 text-purple-500 text-2xl" />
           </Link>
           <Link>
